@@ -264,7 +264,7 @@
 
   <section>
     <h3>Your content</h3>
-    <p>Everything you create in Shape n Ship is yours. It is stored in your own iCloud account (or locally on your device), as described in our <a href="privacy.html">Privacy Policy</a>. We have no access to it and claim no ownership of it. You are responsible for your own content and for keeping your own backups; you can export your data from the app at any time.</p>
+    <p>Everything you create in Shape n Ship is yours. It is stored in your own iCloud account (or locally on your device), as described in our <a href="shape-n-ship-privacy.html">Privacy Policy</a>. We have no access to it and claim no ownership of it. You are responsible for your own content and for keeping your own backups; you can export your data from the app at any time.</p>
   </section>
 
   <section>
@@ -320,7 +320,7 @@
 
   <section>
     <h3>Contact</h3>
-    <p>If you have any questions about these Terms, please get in touch via the <a href="support.html">support page</a>.</p>
+    <p>If you have any questions about these Terms, please get in touch by <a id="contact-email" href="#">email</a>.</p>
   </section>
 
   <hr class="rule">
@@ -332,8 +332,19 @@
 </main>
 
 <footer>
-  <p>© 2026 Frowning Gorilla Ltd &nbsp;·&nbsp; <a href="support.html">Support</a></p>
+  <p>© 2026 Frowning Gorilla Ltd</p>
 </footer>
+
+<script>
+  (function () {
+    var user = 'support';
+    var domain = 'frowning-gorilla.com';
+    var link = document.getElementById('contact-email');
+    if (link) {
+      link.href = 'mailto:' + user + '@' + domain;
+    }
+  })();
+</script>
 
 </body>
 </html>

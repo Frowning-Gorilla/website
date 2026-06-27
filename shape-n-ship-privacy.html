@@ -334,7 +334,7 @@
 
   <section>
     <h3>Contact</h3>
-    <p>If you have any questions about this privacy policy, please get in touch via the <a href="support.html">support page</a>.</p>
+    <p>If you have any questions about this privacy policy, please get in touch by <a id="contact-email" href="#">email</a>.</p>
   </section>
 
   <hr class="rule">
@@ -346,8 +346,19 @@
 </main>
 
 <footer>
-  <p>© 2026 Frowning Gorilla Ltd &nbsp;·&nbsp; <a href="support.html">Support</a></p>
+  <p>© 2026 Frowning Gorilla Ltd</p>
 </footer>
+
+<script>
+  (function () {
+    var user = 'support';
+    var domain = 'frowning-gorilla.com';
+    var link = document.getElementById('contact-email');
+    if (link) {
+      link.href = 'mailto:' + user + '@' + domain;
+    }
+  })();
+</script>
 
 </body>
 </html>
