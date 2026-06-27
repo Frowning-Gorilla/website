@@ -249,7 +249,7 @@
     </div>
     <div class="header-text">
       <h1>Eve Countdown</h1>
-      <p>for macOS</p>
+      <p>for Mac, iPhone &amp; iPad</p>
     </div>
   </div>
 </header>
@@ -263,8 +263,8 @@
   <div class="callout-card">
     <div class="icon">🔒</div>
     <p>
-      Eve Countdown collects no personal data whatsoever.
-      <span>Everything you enter — event names, dates, and preferences — stays on your Mac. It is never transmitted anywhere.</span>
+      Eve Countdown collects no personal data about you.
+      <span>Your countdowns are stored in your own private iCloud account and synced between your own devices by Apple. We never see them, and they are never sent to us or to any other company.</span>
     </p>
   </div>
 </div>
@@ -273,36 +273,60 @@
 
   <section>
     <h3>What data does Eve collect?</h3>
-    <p>None. Eve Countdown does not collect, transmit, store remotely, or share any personal information.</p>
-    <p>The app has no analytics, no crash reporting service, no advertising SDK, and no network connection of any kind. It does not know who you are, where you are, or how you use it.</p>
+    <p>None. Frowning Gorilla does not collect, transmit to itself, store on its own servers, or share any personal information.</p>
+    <p>The app has no analytics, no crash reporting service, no advertising SDK, and no third-party services of any kind. It does not know who you are, where you are, or how you use it.</p>
   </section>
 
   <section>
-    <h3>What is stored on your device?</h3>
-    <p>Eve stores the following data locally on your Mac using macOS's standard UserDefaults system:</p>
+    <h3>Where is your data stored, and does it sync?</h3>
+    <p>Yes — Eve Countdown syncs your countdowns across your devices, and it's important to be accurate about how.</p>
+    <p>Your countdowns (event names, target dates, and your chosen colours, ring styles, sizes, and related preferences) are stored in <strong>your own private iCloud database</strong> using <strong>Apple's CloudKit</strong> service. This is what allows a countdown you create on your Mac to appear in the Eve Countdown app and Home Screen widget on your iPhone and iPad.</p>
+    <p>A local copy is also kept on each device (in the system preferences store, shared between the Mac app, the iOS app, and the widget) so the app works offline and updates instantly. The authoritative copy lives in your iCloud account.</p>
+    <p>Because your data is stored in your own private iCloud database:</p>
     <ul>
-      <li>Your countdown event names and target dates</li>
-      <li>Your chosen colours, ring styles, and widget sizes</li>
-      <li>Window positions and display preferences</li>
-      <li>Your language preference</li>
+      <li>It is held by Apple, under your personal Apple ID and Apple's iCloud terms.</li>
+      <li>It syncs only between your own devices signed in to the same Apple ID.</li>
+      <li>Frowning Gorilla has no access to it. We cannot read it, retrieve it, or recover it for you.</li>
+      <li>If you sign out of iCloud, or turn off iCloud for Eve Countdown in your device settings, syncing stops and your countdowns remain only on that device.</li>
     </ul>
-    <p>This data never leaves your device. It is not backed up to iCloud, not synced to any server, and not accessible to anyone other than you.</p>
+    <p>Apple's privacy policy governs how iCloud handles your data. You can read it at <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">apple.com/legal/privacy</a>.</p>
+  </section>
+
+  <section>
+    <h3>What about network connections?</h3>
+    <p>Eve Countdown only ever communicates with <strong>Apple's own services</strong>, never with any third party:</p>
+    <ul>
+      <li><strong>iCloud / CloudKit</strong> — to sync your countdowns to your private iCloud account.</li>
+      <li><strong>The App Store</strong> — when you choose to buy or restore Premium.</li>
+      <li><strong>Apple Push Notifications</strong> (on iPhone and iPad only) — to receive silent sync messages so your countdowns stay up to date across your devices.</li>
+    </ul>
+    <p>There are no connections to any non-Apple server, and no data is sent to Frowning Gorilla.</p>
+  </section>
+
+  <section>
+    <h3>Notifications</h3>
+    <p>On iPhone and iPad, Eve Countdown may ask your permission to show a notification when a countdown is approaching. It also uses silent background notifications solely to keep your countdowns in sync via iCloud. You can change notification permissions at any time in your device settings.</p>
   </section>
 
   <section>
     <h3>In-App Purchase</h3>
-    <p>Eve Countdown offers an optional one-time in-app purchase (Eve Countdown Premium). All payment processing is handled entirely by Apple through the App Store. Eve does not handle, store, or have access to any payment information.</p>
+    <p>Eve Countdown offers an optional one-time in-app purchase (Eve Countdown Premium). All payment processing is handled entirely by Apple through the App Store. Eve never sees, handles, or stores any payment information — it receives only an Apple-signed confirmation that you've purchased Premium.</p>
     <p>Apple's privacy policy applies to the purchase transaction. You can read it at <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">apple.com/legal/privacy</a>.</p>
   </section>
 
   <section>
     <h3>Third-party services</h3>
-    <p>Eve Countdown uses no third-party services, frameworks, or SDKs beyond what Apple provides as part of macOS. There are no advertising networks, analytics platforms, social media integrations, or external APIs.</p>
+    <p>Eve Countdown uses no third-party services, frameworks, or SDKs. The only code it contains is our own, plus the frameworks Apple builds into macOS, iOS, and iPadOS. There are no advertising networks, analytics platforms, crash reporters, social media integrations, or external APIs.</p>
+  </section>
+
+  <section>
+    <h3>The "Rate this app" prompt</h3>
+    <p>Occasionally Eve Countdown may ask Apple to show its built-in "Rate this app" prompt. Apple controls whether and when it appears, and we receive nothing about your response.</p>
   </section>
 
   <section>
     <h3>Children's privacy</h3>
-    <p>Eve Countdown does not collect data from anyone, including children. The app is rated 4+ on the Mac App Store.</p>
+    <p>Eve Countdown does not collect data from anyone, including children. The app is rated 4+ on the App Store.</p>
   </section>
 
   <section>
@@ -318,7 +342,7 @@
   <hr class="rule">
 
   <p style="font-size:0.8125rem; color: var(--ink-soft);">
-    Last updated: May 2026. Effective immediately.
+    Last updated: June 2026. Effective immediately.
   </p>
 
 </main>
