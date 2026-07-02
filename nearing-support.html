@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Support &amp; FAQ — Nearing</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --teal:       #19BAB0;
+      --teal-light: #e8f9f8;
+      --teal-mid:   #b2e8e6;
+      --ink:        #1a1f2e;
+      --ink-mid:    #4a5168;
+      --ink-soft:   #8a90a2;
+      --rule:       #e8eaf0;
+      --bg:         #fafafa;
+      --white:      #ffffff;
+    }
+
+    html { font-size: 16px; }
+
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Header ── */
+    header {
+      background: var(--white);
+      border-bottom: 1px solid var(--rule);
+      padding: 0 2rem;
+    }
+
+    .header-inner {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 2rem 0 1.75rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .app-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--teal);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .app-icon svg { width: 28px; height: 28px; }
+
+    .header-text h1 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--ink);
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    .header-text p {
+      font-size: 0.8125rem;
+      color: var(--ink-soft);
+      margin-top: 0.2rem;
+      font-weight: 400;
+    }
+
+    /* ── Hero band ── */
+    .hero {
+      background: var(--teal);
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+
+    .hero h2 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 2.25rem;
+      font-weight: 400;
+      color: var(--white);
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+    }
+
+    .hero p {
+      color: rgba(255,255,255,0.82);
+      font-size: 1.0625rem;
+      margin-top: 0.75rem;
+      font-weight: 300;
+    }
+
+    /* ── Main content ── */
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 2.5rem 2rem 5rem;
+    }
+
+    section { margin-bottom: 2.75rem; }
+    section:last-child { margin-bottom: 0; }
+
+    h3 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 1.3125rem;
+      font-weight: 400;
+      color: var(--ink);
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    p {
+      font-size: 0.9375rem;
+      color: var(--ink-mid);
+      margin-bottom: 0.75rem;
+      font-weight: 400;
+    }
+
+    p:last-child { margin-bottom: 0; }
+
+    strong { color: var(--ink); font-weight: 600; }
+
+    ul {
+      list-style: none;
+      margin: 0.5rem 0 0.75rem;
+      padding: 0;
+    }
+
+    ul li {
+      font-size: 0.9375rem;
+      color: var(--ink-mid);
+      padding: 0.35rem 0 0.35rem 1.5rem;
+      position: relative;
+    }
+
+    ul li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.7rem;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--teal);
+    }
+
+    a {
+      color: var(--teal);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    a:hover { text-decoration: underline; }
+
+    /* ── FAQ accordion ── */
+    details {
+      border: 1px solid var(--rule);
+      border-radius: 12px;
+      background: var(--white);
+      margin-bottom: 0.75rem;
+      overflow: hidden;
+    }
+
+    details summary {
+      cursor: pointer;
+      padding: 1rem 1.25rem;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: var(--ink);
+      list-style: none;
+      position: relative;
+      padding-right: 2.5rem;
+    }
+
+    details summary::-webkit-details-marker { display: none; }
+
+    details summary::after {
+      content: '+';
+      position: absolute;
+      right: 1.25rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--teal);
+      font-size: 1.25rem;
+      font-weight: 400;
+    }
+
+    details[open] summary::after { content: '–'; }
+
+    details .answer {
+      padding: 0 1.25rem 1.1rem;
+    }
+
+    details img {
+      max-width: 100%;
+      border-radius: 10px;
+      border: 1px solid var(--rule);
+      margin: 0.5rem 0;
+      display: block;
+    }
+
+    details .caption {
+      font-size: 0.8125rem;
+      color: var(--ink-soft);
+      font-style: italic;
+      margin-bottom: 0.75rem;
+    }
+
+    .rule { border: none; border-top: 1px solid var(--rule); margin: 2.5rem 0; }
+
+    /* ── Contact card ── */
+    .contact-card {
+      background: var(--teal-light);
+      border: 1.5px solid var(--teal-mid);
+      border-radius: 14px;
+      padding: 1.5rem 1.75rem;
+    }
+
+    .contact-card p {
+      font-size: 0.9375rem;
+      color: var(--ink);
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--white);
+      border-top: 1px solid var(--rule);
+      padding: 1.75rem 2rem;
+      text-align: center;
+    }
+
+    footer p {
+      font-size: 0.8125rem;
+      color: var(--ink-soft);
+      margin: 0;
+    }
+
+    footer a { font-size: 0.8125rem; }
+
+    @media (max-width: 600px) {
+      .hero h2 { font-size: 1.75rem; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="app-icon">
+      <!-- Countdown ring mark in SVG -->
+      <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="14" cy="14" r="10" stroke="white" stroke-width="2.5"
+                stroke-linecap="round" stroke-dasharray="52 10"
+                transform="rotate(-90 14 14)"/>
+        <circle cx="7.5" cy="19.5" r="2.4" fill="white"/>
+      </svg>
+    </div>
+    <div class="header-text">
+      <h1>Nearing</h1>
+      <p>for Mac, iPhone &amp; iPad</p>
+    </div>
+  </div>
+</header>
+
+<div class="hero">
+  <h2>Support &amp; FAQ</h2>
+  <p>Learn how to use Nearing, or get in touch if you need help.</p>
+</div>
+
+<main>
+
+  <section>
+    <h3>Common questions</h3>
+
+    <details>
+      <summary>How do I add a new countdown?</summary>
+      <div class="answer">
+        <p>On your Mac, click the gear icon on any floating widget, or use the menu bar (⌘,) to open the Manage Countdowns panel. Click the + button to add a new countdown.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Is there an iPhone and iPad app?</summary>
+      <div class="answer">
+        <p>Yes — Nearing is a single app for Mac, iPhone, and iPad. Install it on your iPhone or iPad, sign in to the same iCloud account as your Mac, and your countdowns appear automatically. You can view them in the app and pin them to your Home Screen as widgets.</p>
+        <p>Countdowns are created and edited on your Mac — the iPhone and iPad app is for keeping them in view wherever you are.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Can I run more than one countdown at a time?</summary>
+      <div class="answer">
+        <p>Yes — free users can run up to three simultaneous countdowns. Nearing Premium removes that limit entirely.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>How do I get the countdown spoken aloud?</summary>
+      <div class="answer">
+        <p>Nearing can read your remaining time aloud using text-to-speech, adapting what it says based on the time left: reading weeks and days when the event is far off, down to hours, minutes, and seconds on the final day.</p>
+        <img src="https://www.frowning-gorilla.com/Account%20countdown%20screen%20clip.png" alt="Announce countdown settings">
+        <p>In the countdown settings, you have two scheduling modes:</p>
+        <ul>
+          <li><strong>Auto Mode (Default):</strong> Announcements intelligently become more frequent as your event approaches (shifting from weekly, to daily, to hourly, right down to every minute in the final stretch). It also guarantees announcements on major milestones (1 week, 1 day, 1 hour to go).</li>
+          <li><strong>Manual Mode:</strong> Turn off "Auto" to set a fixed interval (e.g. Every day, Every hour). If you select "Every day", you can pick the exact time of day you want the announcement.</li>
+        </ul>
+        <p><strong>Quiet Hours:</strong> When using Manual Mode, you can enable Quiet Hours to prevent announcements during the night or while you are working.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Can I change when the Days Ring starts calculating from?</summary>
+      <div class="answer">
+        <p>Yes. The large outer "Days" ring visually tracks the entire duration of your wait, depleting as your event gets closer. By default, this ring begins calculating from the moment you create the countdown.</p>
+        <img src="https://www.frowning-gorilla.com/Days%20ring%20clip.png" alt="Days ring custom start date setting">
+        <p class="caption">Set any past date to anchor the start of your countdown.</p>
+        <img src="https://www.frowning-gorilla.com/Days%20ring%20in%20use%20clip.png" alt="Days ring in use on the widget">
+        <p class="caption">The days ring depletes based on the total time between the start date and the event date.</p>
+        <p>If you've already been waiting a while before adding the event to Nearing, you can set a <strong>custom start date in the past</strong>. This ensures the visual progress of the Days Ring accurately reflects the true length of your wait. To do this, open your countdown settings and adjust the date under the "Days Ring" section.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>What do I get with Nearing Premium?</summary>
+      <div class="answer">
+        <p>Nearing Premium is a one-time, lifetime purchase that unlocks the full set of customisation options and removes the free-tier limits. Here is what is included:</p>
+        <ul>
+          <li><strong>Unlimited countdowns:</strong> Free users can create up to 3 countdowns. Premium removes the limit, so you can track as many events as you like — birthdays, holidays, deadlines, launches, anniversaries — side by side.</li>
+          <li><strong>Every background colour:</strong> The free version comes in teal. Premium unlocks the full palette of 11 background colours, so you can match each countdown to the mood of the event — warm yellow for a holiday, deep indigo for a launch, classic black for a formal occasion.</li>
+          <li><strong>Rainbow and single-colour rings:</strong> By default, ring colours adjust automatically to suit the background. Premium adds two extra ring styles: a vibrant rainbow palette and a single-colour override, letting you fine-tune the look of each widget.</li>
+          <li><strong>Compact widget size:</strong> The standard widget shows four rings side by side. Premium adds a compact size — a smaller, square widget that highlights the headline number, ideal for tucking into the corner of your screen.</li>
+          <li><strong>Adjustable opacity:</strong> Free widgets are fully opaque. With Premium you can dial each widget's transparency up or down, so it blends gently into your desktop instead of dominating it.</li>
+          <li><strong>A cleaner interface:</strong> Upgrade prompts and reminders disappear once you're on Premium, leaving a tidier Manage Countdowns window.</li>
+        </ul>
+        <p><strong>A few other things worth knowing:</strong></p>
+        <ul>
+          <li>It's a one-time purchase. No subscription, no renewals — buy it once and it's yours for good.</li>
+          <li>One purchase covers everything. Nearing is a single app across Mac, iPhone, and iPad — buy Premium once and it applies everywhere.</li>
+          <li>Family Sharing is supported. Anyone in your Family Sharing group gets Premium too.</li>
+          <li>Restore on any device. Signed in with the same Apple Account? Just open the upgrade screen and tap Restore to bring your purchase across.</li>
+        </ul>
+        <p><em>Note: Spoken countdown announcements, large-text mode, always-on-top, and the celebration animation when a countdown completes remain free and unchanged for everyone.</em></p>
+      </div>
+    </details>
+
+    <details>
+      <summary>I bought Premium but it isn't showing as unlocked.</summary>
+      <div class="answer">
+        <p>Open the Manage Countdowns panel and tap <strong>Restore Purchase</strong> at the bottom of the window. This syncs your purchase with the App Store and should unlock Premium immediately. If the problem persists, please get in touch below.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>How do I change the language?</summary>
+      <div class="answer">
+        <p>Open the Manage Countdowns panel (⌘,). At the bottom of the window there's a language picker. Changing the language requires a relaunch — Nearing will prompt you to restart automatically.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>The widget disappeared from my desktop.</summary>
+      <div class="answer">
+        <p>Nearing's Mac widgets are floating windows — they can sometimes end up off-screen if your display configuration changes. Open the Manage Countdowns panel, delete the affected countdown, and add it again. Your settings will need to be re-entered but the countdown will reappear.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Does Nearing work on multiple displays?</summary>
+      <div class="answer">
+        <p>Yes — you can drag Nearing's widgets to any connected display. Their position is saved per-display when possible.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>What does Nearing require?</summary>
+      <div class="answer">
+        <p>Nearing requires macOS 13 Ventura or later on the Mac, and iOS 17 or later on iPhone and iPad.</p>
+      </div>
+    </details>
+
+  </section>
+
+  <hr class="rule">
+
+  <section>
+    <h3>Get in touch</h3>
+    <div class="contact-card">
+      <p>Couldn't find what you needed above? Send us an <a id="contact-email" href="#">email</a> and we'll get back to you as soon as we can. It helps if you mention your macOS or iOS version and a short description of what's happening.</p>
+    </div>
+    <!-- FORM OPTION: to use the contact form from the Eve support page instead of the
+         email link above, copy the <form> block and its submit script from the live
+         support.html page source and paste it here, replacing the contact-card div. -->
+  </section>
+
+</main>
+
+<footer>
+  <p>© 2026 Frowning Gorilla Ltd &nbsp;·&nbsp; <a href="nearing-privacy.html">Privacy Policy</a></p>
+</footer>
+
+<script>
+  (function () {
+    var user = 'support';
+    var domain = 'frowning-gorilla.com';
+    var link = document.getElementById('contact-email');
+    if (link) {
+      link.href = 'mailto:' + user + '@' + domain;
+    }
+  })();
+</script>
+
+</body>
+</html>
