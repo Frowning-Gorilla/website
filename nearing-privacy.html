@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — Nearing</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --teal:       #19BAB0;
+      --teal-light: #e8f9f8;
+      --teal-mid:   #b2e8e6;
+      --ink:        #1a1f2e;
+      --ink-mid:    #4a5168;
+      --ink-soft:   #8a90a2;
+      --rule:       #e8eaf0;
+      --bg:         #fafafa;
+      --white:      #ffffff;
+    }
+
+    html { font-size: 16px; }
+
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Header ── */
+    header {
+      background: var(--white);
+      border-bottom: 1px solid var(--rule);
+      padding: 0 2rem;
+    }
+
+    .header-inner {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 2rem 0 1.75rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .app-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--teal);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .app-icon svg {
+      width: 28px;
+      height: 28px;
+    }
+
+    .header-text h1 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--ink);
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    .header-text p {
+      font-size: 0.8125rem;
+      color: var(--ink-soft);
+      margin-top: 0.2rem;
+      font-weight: 400;
+    }
+
+    /* ── Hero band ── */
+    .hero {
+      background: var(--teal);
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+
+    .hero h2 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 2.25rem;
+      font-weight: 400;
+      color: var(--white);
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+    }
+
+    .hero p {
+      color: rgba(255,255,255,0.82);
+      font-size: 1.0625rem;
+      margin-top: 0.75rem;
+      font-weight: 300;
+    }
+
+    /* ── Callout card ── */
+    .callout {
+      max-width: 720px;
+      margin: 2.5rem auto 0;
+      padding: 0 2rem;
+    }
+
+    .callout-card {
+      background: var(--teal-light);
+      border: 1.5px solid var(--teal-mid);
+      border-radius: 14px;
+      padding: 1.5rem 1.75rem;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .callout-card .icon {
+      font-size: 1.5rem;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    .callout-card p {
+      font-size: 1rem;
+      color: var(--ink);
+      font-weight: 500;
+      line-height: 1.5;
+    }
+
+    .callout-card p span {
+      font-weight: 300;
+      color: var(--ink-mid);
+      display: block;
+      margin-top: 0.25rem;
+      font-size: 0.9375rem;
+    }
+
+    /* ── Main content ── */
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 2.5rem 2rem 5rem;
+    }
+
+    section {
+      margin-bottom: 2.75rem;
+    }
+
+    section:last-child {
+      margin-bottom: 0;
+    }
+
+    h3 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 1.3125rem;
+      font-weight: 400;
+      color: var(--ink);
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    p {
+      font-size: 0.9375rem;
+      color: var(--ink-mid);
+      margin-bottom: 0.75rem;
+      font-weight: 400;
+    }
+
+    p:last-child { margin-bottom: 0; }
+
+    strong { color: var(--ink); font-weight: 600; }
+
+    ul {
+      list-style: none;
+      margin: 0.5rem 0 0.75rem;
+      padding: 0;
+    }
+
+    ul li {
+      font-size: 0.9375rem;
+      color: var(--ink-mid);
+      padding: 0.35rem 0 0.35rem 1.5rem;
+      position: relative;
+    }
+
+    ul li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.7rem;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--teal);
+    }
+
+    a {
+      color: var(--teal);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    a:hover { text-decoration: underline; }
+
+    .rule { border: none; border-top: 1px solid var(--rule); margin: 2.5rem 0; }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--white);
+      border-top: 1px solid var(--rule);
+      padding: 1.75rem 2rem;
+      text-align: center;
+    }
+
+    footer p {
+      font-size: 0.8125rem;
+      color: var(--ink-soft);
+      margin: 0;
+    }
+
+    @media (max-width: 600px) {
+      .hero h2 { font-size: 1.75rem; }
+      .callout-card { flex-direction: column; gap: 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="app-icon">
+      <!-- Countdown ring mark in SVG -->
+      <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="14" cy="14" r="10" stroke="white" stroke-width="2.5"
+                stroke-linecap="round" stroke-dasharray="52 10"
+                transform="rotate(-90 14 14)"/>
+        <circle cx="7.5" cy="19.5" r="2.4" fill="white"/>
+      </svg>
+    </div>
+    <div class="header-text">
+      <h1>Nearing</h1>
+      <p>for Mac, iPhone &amp; iPad</p>
+    </div>
+  </div>
+</header>
+
+<div class="hero">
+  <h2>Privacy Policy</h2>
+  <p>Simple, honest, and short enough to actually read.</p>
+</div>
+
+<div class="callout">
+  <div class="callout-card">
+    <div class="icon">🔒</div>
+    <p>
+      Nearing collects no personal data about you.
+      <span>Your countdowns are stored in your own private iCloud account and synced between your own devices by Apple. We never see them, and they are never sent to us or to any other company.</span>
+    </p>
+  </div>
+</div>
+
+<main>
+
+  <section>
+    <h3>What data does Nearing collect?</h3>
+    <p>None. Frowning Gorilla does not collect, transmit to itself, store on its own servers, or share any personal information.</p>
+    <p>The app has no analytics, no crash reporting service, no advertising SDK, and no third-party services of any kind. It does not know who you are, where you are, or how you use it.</p>
+  </section>
+
+  <section>
+    <h3>Where is your data stored, and does it sync?</h3>
+    <p>Nearing syncs your countdowns across your devices, and it's important to be accurate about how.</p>
+    <p>Your countdowns (event names, target dates, and your chosen colours, ring styles, sizes, and related preferences) are stored in <strong>your own private iCloud database</strong> using <strong>Apple's CloudKit</strong> service. This is what allows a countdown you create on your Mac to appear in Nearing and its Home Screen widget on your iPhone and iPad.</p>
+    <p>A local copy is also kept on each device (in the system preferences store, shared between the Mac app, the iOS app, and the widget) so the app works offline and updates instantly. The authoritative copy lives in your iCloud account.</p>
+    <p>Because your data is stored in your own private iCloud database:</p>
+    <ul>
+      <li>It is held by Apple, under your personal Apple ID and Apple's iCloud terms.</li>
+      <li>It syncs only between your own devices signed in to the same Apple ID.</li>
+      <li>Frowning Gorilla has no access to it. We cannot read it, retrieve it, or recover it for you.</li>
+      <li>If you sign out of iCloud, or turn off iCloud for Nearing in your device settings, syncing stops and your countdowns remain only on that device.</li>
+    </ul>
+    <p>Apple's privacy policy governs how iCloud handles your data. You can read it at <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">apple.com/legal/privacy</a>.</p>
+  </section>
+
+  <section>
+    <h3>What about network connections?</h3>
+    <p>Nearing only ever communicates with <strong>Apple's own services</strong>, never with any third party:</p>
+    <ul>
+      <li><strong>iCloud / CloudKit</strong> — to sync your countdowns to your private iCloud account.</li>
+      <li><strong>The App Store</strong> — when you choose to buy or restore Premium.</li>
+      <li><strong>Apple Push Notifications</strong> (on iPhone and iPad only) — to receive silent sync messages so your countdowns stay up to date across your devices.</li>
+    </ul>
+    <p>There are no connections to any non-Apple server, and no data is sent to Frowning Gorilla.</p>
+  </section>
+
+  <section>
+    <h3>Notifications</h3>
+    <p>On iPhone and iPad, Nearing may ask your permission to show a notification when a countdown is approaching. It also uses silent background notifications solely to keep your countdowns in sync via iCloud. You can change notification permissions at any time in your device settings.</p>
+  </section>
+
+  <section>
+    <h3>In-App Purchase</h3>
+    <p>Nearing offers an optional one-time in-app purchase (Nearing Premium). All payment processing is handled entirely by Apple through the App Store. Nearing never sees, handles, or stores any payment information — it receives only an Apple-signed confirmation that you've purchased Premium.</p>
+    <p>Apple's privacy policy applies to the purchase transaction. You can read it at <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">apple.com/legal/privacy</a>.</p>
+  </section>
+
+  <section>
+    <h3>Third-party services</h3>
+    <p>Nearing uses no third-party services, frameworks, or SDKs. The only code it contains is our own, plus the frameworks Apple builds into macOS, iOS, and iPadOS. There are no advertising networks, analytics platforms, crash reporters, social media integrations, or external APIs.</p>
+  </section>
+
+  <section>
+    <h3>The "Rate this app" prompt</h3>
+    <p>Occasionally Nearing may ask Apple to show its built-in "Rate this app" prompt. Apple controls whether and when it appears, and we receive nothing about your response.</p>
+  </section>
+
+  <section>
+    <h3>Children's privacy</h3>
+    <p>Nearing does not collect data from anyone, including children. The app is rated 4+ on the App Store.</p>
+  </section>
+
+  <section>
+    <h3>Changes to this policy</h3>
+    <p>If Nearing ever changes in a way that affects privacy — for example, if a future version adds crash reporting — this page will be updated to reflect that before the update is released. The date at the bottom of this page shows when it was last revised.</p>
+  </section>
+
+  <section>
+    <h3>Contact</h3>
+    <p>If you have any questions about this privacy policy, please get in touch by <a id="contact-email" href="#">email</a>.</p>
+  </section>
+
+  <hr class="rule">
+
+  <p style="font-size:0.8125rem; color: var(--ink-soft);">
+    Last updated: July 2026. Effective immediately.
+  </p>
+
+</main>
+
+<footer>
+  <p>© 2026 Frowning Gorilla Ltd</p>
+</footer>
+
+<script>
+  (function () {
+    var user = 'support';
+    var domain = 'frowning-gorilla.com';
+    var link = document.getElementById('contact-email');
+    if (link) {
+      link.href = 'mailto:' + user + '@' + domain;
+    }
+  })();
+</script>
+
+</body>
+</html>
