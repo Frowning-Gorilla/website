@@ -1,0 +1,331 @@
+/* ===========================================================================
+   Frowning Gorilla — shared stylesheet
+
+   Adopt with a single <link> in <head>. Pages may keep a small local <style>
+   block only for rules that are genuinely unique to that page.
+
+   Fonts are self-hosted (see fonts/README.md). Never add a fonts.googleapis.com
+   link — no external dependencies, per CLAUDE.md.
+
+   Per-app accent: put a theme class on <body>.
+     <body class="theme-shape-n-ship">   orange
+     <body class="theme-nearing">        teal
+     (no class)                          company indigo — non-app pages
+
+   Component rules (contact form, FAQ disclosure) are deliberately not here yet;
+   they get added by the phase that first needs them, so each commit stays
+   reviewable.
+   =========================================================================== */
+
+/* ── Fonts ─────────────────────────────────────────────────────────────────
+   DM Sans is a variable font: one file covers the whole 300–600 range, so the
+   weight range is declared rather than a face per weight. DM Serif Display is
+   static 400 — there is no bold serif; don't ask for one, it would faux-bold.
+
+   No italic face is shipped. <em> renders as a synthesised oblique, which is
+   what the site has always done. Adding a real italic would change how existing
+   pages render, including the frozen Eve Countdown pages.                    */
+
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 300 600;
+  font-display: swap;
+  src: url('fonts/dm-sans-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 300 600;
+  font-display: swap;
+  src: url('fonts/dm-sans-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'DM Serif Display';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fonts/dm-serif-display-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'DM Serif Display';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fonts/dm-serif-display-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* ── Palette ───────────────────────────────────────────────────────────────
+   Every accent comes as a pair, and the distinction is load-bearing:
+
+     --accent       brand colour. Fills, bullets, icon tiles. NOT text.
+     --accent-deep  anything a person has to read: links, and any band with
+                    white text on it.
+
+   The brand accents fail WCAG AA as text on --bg (teal #19BAB0 is 2.31:1,
+   orange #E0641C is 3.35:1). The deep variants clear it (both 5.36:1). Using
+   --accent for text is a bug, not a style choice.                            */
+
+:root {
+  /* Company accent — non-app pages. Passes as text on --bg (7.99:1) and with
+     white on it (8.33:1), so it needs no separate deep variant. */
+  --accent:       #3E4C7A;
+  --accent-deep:  #3E4C7A;
+  --accent-light: #eef0f7;
+  --accent-mid:   #c7cde3;
+
+  --ink:          #1a1f2e;
+  --ink-mid:      #4a5168;
+  --ink-soft:     #8a90a2;
+  --rule:         #e8eaf0;
+  --bg:           #fafafa;
+  --white:        #ffffff;
+}
+
+.theme-nearing {
+  --accent:       #19BAB0;
+  --accent-deep:  #0E7470;  /* 5.36:1 on --bg; white on it 5.60:1 */
+  --accent-light: #e8f9f8;
+  --accent-mid:   #b2e8e6;
+}
+
+.theme-shape-n-ship {
+  --accent:       #E0641C;
+  --accent-deep:  #B0470F;  /* 5.36:1 on --bg; white on it 5.59:1 */
+  --accent-light: #fdf1e9;
+  --accent-mid:   #f5cdaf;
+}
+
+/* ── Base ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: 16px; }
+
+body {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Header ── */
+header {
+  background: var(--white);
+  border-bottom: 1px solid var(--rule);
+  padding: 0 2rem;
+}
+
+.header-inner {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2rem 0 1.75rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.app-icon {
+  width: 48px;
+  height: 48px;
+  background: var(--accent);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.app-icon svg { width: 28px; height: 28px; }
+
+.header-text h1 {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.header-text p {
+  font-size: 0.8125rem;
+  color: var(--ink-soft);
+  margin-top: 0.2rem;
+  font-weight: 400;
+}
+
+/* ── Hero band ──────────────────────────────────────────────────────────────
+   Uses --accent-deep, not --accent. White on the brand teal is 2.42:1 and fails
+   outright; on --accent-deep it is 5.60:1. The subtitle is 0.92 white because
+   at the old 0.82 it lands at 4.33:1 — still short of AA.                    */
+.hero {
+  background: var(--accent-deep);
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.hero h2 {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 2.25rem;
+  font-weight: 400;
+  color: var(--white);
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+
+.hero p {
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 1.0625rem;
+  margin-top: 0.75rem;
+  font-weight: 300;
+}
+
+/* ── Callout card ── */
+.callout {
+  max-width: 720px;
+  margin: 2.5rem auto 0;
+  padding: 0 2rem;
+}
+
+.callout-card {
+  background: var(--accent-light);
+  border: 1.5px solid var(--accent-mid);
+  border-radius: 14px;
+  padding: 1.5rem 1.75rem;
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.callout-card .icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+.callout-card p {
+  font-size: 1rem;
+  color: var(--ink);
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.callout-card p span {
+  font-weight: 300;
+  color: var(--ink-mid);
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.9375rem;
+}
+
+/* ── Main content ── */
+main {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem 5rem;
+}
+
+section { margin-bottom: 2.75rem; }
+section:last-child { margin-bottom: 0; }
+
+h3 {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 1.3125rem;
+  font-weight: 400;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+h4 {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 1.25rem 0 0.5rem;
+}
+
+p {
+  font-size: 0.9375rem;
+  color: var(--ink-mid);
+  margin-bottom: 0.75rem;
+  font-weight: 400;
+}
+
+p:last-child { margin-bottom: 0; }
+
+strong { color: var(--ink); font-weight: 600; }
+
+ul {
+  list-style: none;
+  margin: 0.5rem 0 0.75rem;
+  padding: 0;
+}
+
+ul li {
+  font-size: 0.9375rem;
+  color: var(--ink-mid);
+  padding: 0.35rem 0 0.35rem 1.5rem;
+  position: relative;
+}
+
+ul li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.7rem;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+a {
+  color: var(--accent-deep);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+a:hover { text-decoration: underline; }
+
+/* Keyboard focus must stay visible — don't remove without a replacement. */
+a:focus-visible,
+summary:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--accent-deep);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.rule { border: none; border-top: 1px solid var(--rule); margin: 2.5rem 0; }
+
+/* ── Footer ── */
+footer {
+  background: var(--white);
+  border-top: 1px solid var(--rule);
+  padding: 1.75rem 2rem;
+  text-align: center;
+}
+
+footer p {
+  font-size: 0.8125rem;
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+footer a { font-size: 0.8125rem; }
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  .hero h2 { font-size: 1.75rem; }
+  .callout-card { flex-direction: column; gap: 0.5rem; }
+}
