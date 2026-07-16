@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Website privacy — Frowning Gorilla</title>
+  <meta name="description" content="What the Frowning Gorilla website collects, and what it doesn't. No cookies, no analytics, no tracking.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!--
+  This page covers THIS WEBSITE only. Each app has its own privacy policy and
+  they are not interchangeable — don't merge them.
+
+  Deliberately does not link the Eve Countdown policy at privacy-policy.html.
+  Those pages are frozen and stay undiscoverable from the company site; this
+  page is linked from every footer, so linking Eve here would undo that.
+-->
+
+<header>
+  <div class="header-inner">
+    <div class="header-text">
+      <h1>Frowning Gorilla</h1>
+      <p>frowning-gorilla.com</p>
+    </div>
+  </div>
+</header>
+
+<div class="hero">
+  <h2>Website privacy</h2>
+  <p>What this site collects, and what it doesn't.</p>
+</div>
+
+<main>
+
+  <section>
+    <h3>The short version</h3>
+    <p>This website sets no cookies, runs no analytics, and tracks nothing. We don't know who you are, how you got here, or what you looked at. There is no consent banner because there is nothing to consent to.</p>
+  </section>
+
+  <section>
+    <h3>What the site loads</h3>
+    <p>Every part of this site is served from our own domain. The fonts are hosted here rather than fetched from Google Fonts, so no third party sees your visit. No advertising, no trackers, no embedded scripts from other companies.</p>
+    <p>The site is hosted on GitHub Pages. Like any web host, GitHub processes the requests needed to serve pages to you. See <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" rel="noopener">GitHub's privacy statement</a>.</p>
+  </section>
+
+  <section>
+    <h3>If you use a contact form</h3>
+    <p>Our support pages have a contact form. When you send one, it is processed by <strong>Formspree</strong>, who pass it on to us by email. That means the details you type — your name, your email address, and your message — go through Formspree's systems.</p>
+    <p>We use what you send only to answer you. We don't add you to a mailing list, and we don't pass it on to anyone else. See <a href="https://formspree.io/legal/privacy-policy" rel="noopener">Formspree's privacy policy</a>.</p>
+    <p>If you'd rather not use the form, email us instead — the address is at the bottom of this page.</p>
+  </section>
+
+  <section>
+    <h3>The apps are separate</h3>
+    <p>This note covers the website. Each app has its own privacy policy, because each one handles data differently:</p>
+    <ul>
+      <li><a href="shape-n-ship-privacy.html">Shape n Ship privacy policy</a></li>
+      <li><a href="nearing-privacy.html">Nearing privacy policy</a></li>
+    </ul>
+  </section>
+
+  <section>
+    <h3>Changes</h3>
+    <p>If this ever changes, we'll change this page. There is no mailing list to notify, because we don't have your address unless you've written to us.</p>
+  </section>
+
+  <section>
+    <h3>Contact</h3>
+    <p>Questions about any of this? Get in touch by <a id="contact-email" href="#">email</a>.</p>
+  </section>
+
+</main>
+
+<footer>
+  <p>© 2026 Frowning Gorilla Ltd &nbsp;·&nbsp; <a href="site-privacy.html">Website privacy</a></p>
+</footer>
+
+<script>
+  // Keeps the address out of the page source. Same pattern as the other pages.
+  (function () {
+    var user = 'support';
+    var domain = 'frowning-gorilla.com';
+    var link = document.getElementById('contact-email');
+    if (link) {
+      link.href = 'mailto:' + user + '@' + domain;
+    }
+  })();
+</script>
+
+</body>
+</html>
