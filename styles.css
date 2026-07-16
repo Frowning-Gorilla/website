@@ -1,16 +1,26 @@
 /* ===========================================================================
    Frowning Gorilla — shared stylesheet
 
-   Adopt with a single <link> in <head>. Pages may keep a small local <style>
-   block only for rules that are genuinely unique to that page.
+   To adopt: <link rel="stylesheet" href="styles.css"> AND class="fg" on <body>.
+   A page may keep a small local <style> block only for rules genuinely unique
+   to it.
+
+   WHY THE CLASS: everything below the @font-face block is scoped to .fg, so
+   this file cannot reach a page that still carries its own inline CSS. Those
+   pages link it for the self-hosted fonts alone and must NOT add the class.
+
+   That scope is load-bearing, not tidiness. Unscoped, `strong { font-weight:
+   600 }` reached the frozen Eve pages — which define no strong rule of their
+   own — dropping 12 elements from 700 to 600 and reflowing support.html 148px
+   taller. The scope is what keeps the freeze intact as this file grows.
 
    Fonts are self-hosted (see fonts/README.md). Never add a fonts.googleapis.com
    link — no external dependencies, per CLAUDE.md.
 
-   Per-app accent: put a theme class on <body>.
-     <body class="theme-shape-n-ship">   orange
-     <body class="theme-nearing">        teal
-     (no class)                          company indigo — non-app pages
+   Per-app accent: add a theme class alongside .fg, or on any element within it.
+     <body class="fg theme-shape-n-ship">   orange
+     <body class="fg theme-nearing">        teal
+     <body class="fg">                      company indigo — non-app pages
 
    Component rules (contact form, FAQ disclosure) are deliberately not here yet;
    they get added by the phase that first needs them, so each commit stays
@@ -18,6 +28,9 @@
    =========================================================================== */
 
 /* ── Fonts ─────────────────────────────────────────────────────────────────
+   Unscoped on purpose: every page needs the faces, including the pages that
+   opt out of the design system below.
+
    DM Sans is a variable font: one file covers the whole 300–600 range, so the
    weight range is declared rather than a face per weight. DM Serif Display is
    static 400 — there is no bold serif; don't ask for one, it would faux-bold.
@@ -62,6 +75,10 @@
   unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 
+/* ===========================================================================
+   Everything below is scoped to .fg. None of it applies without the class.
+   =========================================================================== */
+
 /* ── Palette ───────────────────────────────────────────────────────────────
    Every accent comes as a pair, and the distinction is load-bearing:
 
@@ -71,9 +88,13 @@
 
    The brand accents fail WCAG AA as text on --bg (teal #19BAB0 is 2.31:1,
    orange #E0641C is 3.35:1). The deep variants clear it (both 5.36:1). Using
-   --accent for text is a bug, not a style choice.                            */
+   --accent for text is a bug, not a style choice.
 
-:root {
+   The theme classes below carry custom properties only. They are left unscoped
+   because nothing outside .fg consumes these variables, so they cannot have a
+   visual effect on a page that has not opted in.                             */
+
+.fg {
   /* Company accent — non-app pages. Passes as text on --bg (7.99:1) and with
      white on it (8.33:1), so it needs no separate deep variant. */
   --accent:       #3E4C7A;
@@ -104,12 +125,14 @@
 }
 
 /* ── Base ── */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+.fg,
+.fg *,
+.fg *::before,
+.fg *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { font-size: 16px; }
-
-body {
+body.fg {
   font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 16px;
   background: var(--bg);
   color: var(--ink);
   line-height: 1.7;
@@ -117,13 +140,13 @@ body {
 }
 
 /* ── Header ── */
-header {
+.fg header {
   background: var(--white);
   border-bottom: 1px solid var(--rule);
   padding: 0 2rem;
 }
 
-.header-inner {
+.fg .header-inner {
   max-width: 720px;
   margin: 0 auto;
   padding: 2rem 0 1.75rem;
@@ -132,7 +155,7 @@ header {
   gap: 1rem;
 }
 
-.app-icon {
+.fg .app-icon {
   width: 48px;
   height: 48px;
   background: var(--accent);
@@ -143,9 +166,9 @@ header {
   flex-shrink: 0;
 }
 
-.app-icon svg { width: 28px; height: 28px; }
+.fg .app-icon svg { width: 28px; height: 28px; }
 
-.header-text h1 {
+.fg .header-text h1 {
   font-family: 'DM Serif Display', Georgia, serif;
   font-size: 1.5rem;
   font-weight: 400;
@@ -154,7 +177,7 @@ header {
   line-height: 1.2;
 }
 
-.header-text p {
+.fg .header-text p {
   font-size: 0.8125rem;
   color: var(--ink-soft);
   margin-top: 0.2rem;
@@ -162,16 +185,16 @@ header {
 }
 
 /* ── Hero band ──────────────────────────────────────────────────────────────
-   Uses --accent-deep, not --accent. White on the brand teal is 2.42:1 and fails
-   outright; on --accent-deep it is 5.60:1. The subtitle is 0.92 white because
-   at the old 0.82 it lands at 4.33:1 — still short of AA.                    */
-.hero {
+   Uses --accent-deep, not --accent. White on the brand teal is 2.42:1 and
+   fails outright; on --accent-deep it is 5.60:1. The subtitle is 0.92 white
+   because at the old 0.82 it lands at 4.33:1 — still short of AA.           */
+.fg .hero {
   background: var(--accent-deep);
   padding: 3rem 2rem;
   text-align: center;
 }
 
-.hero h2 {
+.fg .hero h2 {
   font-family: 'DM Serif Display', Georgia, serif;
   font-size: 2.25rem;
   font-weight: 400;
@@ -180,7 +203,7 @@ header {
   line-height: 1.15;
 }
 
-.hero p {
+.fg .hero p {
   color: rgba(255, 255, 255, 0.92);
   font-size: 1.0625rem;
   margin-top: 0.75rem;
@@ -188,13 +211,13 @@ header {
 }
 
 /* ── Callout card ── */
-.callout {
+.fg .callout {
   max-width: 720px;
   margin: 2.5rem auto 0;
   padding: 0 2rem;
 }
 
-.callout-card {
+.fg .callout-card {
   background: var(--accent-light);
   border: 1.5px solid var(--accent-mid);
   border-radius: 14px;
@@ -204,20 +227,20 @@ header {
   align-items: flex-start;
 }
 
-.callout-card .icon {
+.fg .callout-card .icon {
   font-size: 1.5rem;
   flex-shrink: 0;
   margin-top: 0.1rem;
 }
 
-.callout-card p {
+.fg .callout-card p {
   font-size: 1rem;
   color: var(--ink);
   font-weight: 500;
   line-height: 1.5;
 }
 
-.callout-card p span {
+.fg .callout-card p span {
   font-weight: 300;
   color: var(--ink-mid);
   display: block;
@@ -226,16 +249,16 @@ header {
 }
 
 /* ── Main content ── */
-main {
+.fg main {
   max-width: 720px;
   margin: 0 auto;
   padding: 2.5rem 2rem 5rem;
 }
 
-section { margin-bottom: 2.75rem; }
-section:last-child { margin-bottom: 0; }
+.fg section { margin-bottom: 2.75rem; }
+.fg section:last-child { margin-bottom: 0; }
 
-h3 {
+.fg h3 {
   font-family: 'DM Serif Display', Georgia, serif;
   font-size: 1.3125rem;
   font-weight: 400;
@@ -246,7 +269,7 @@ h3 {
   border-bottom: 1px solid var(--rule);
 }
 
-h4 {
+.fg h4 {
   font-family: 'DM Sans', system-ui, sans-serif;
   font-size: 1rem;
   font-weight: 600;
@@ -254,31 +277,31 @@ h4 {
   margin: 1.25rem 0 0.5rem;
 }
 
-p {
+.fg p {
   font-size: 0.9375rem;
   color: var(--ink-mid);
   margin-bottom: 0.75rem;
   font-weight: 400;
 }
 
-p:last-child { margin-bottom: 0; }
+.fg p:last-child { margin-bottom: 0; }
 
-strong { color: var(--ink); font-weight: 600; }
+.fg strong { color: var(--ink); font-weight: 600; }
 
-ul {
+.fg ul {
   list-style: none;
   margin: 0.5rem 0 0.75rem;
   padding: 0;
 }
 
-ul li {
+.fg ul li {
   font-size: 0.9375rem;
   color: var(--ink-mid);
   padding: 0.35rem 0 0.35rem 1.5rem;
   position: relative;
 }
 
-ul li::before {
+.fg ul li::before {
   content: '';
   position: absolute;
   left: 0;
@@ -289,43 +312,43 @@ ul li::before {
   background: var(--accent);
 }
 
-a {
+.fg a {
   color: var(--accent-deep);
   text-decoration: none;
   font-weight: 500;
 }
 
-a:hover { text-decoration: underline; }
+.fg a:hover { text-decoration: underline; }
 
 /* Keyboard focus must stay visible — don't remove without a replacement. */
-a:focus-visible,
-summary:focus-visible,
-button:focus-visible {
+.fg a:focus-visible,
+.fg summary:focus-visible,
+.fg button:focus-visible {
   outline: 2px solid var(--accent-deep);
   outline-offset: 2px;
   border-radius: 2px;
 }
 
-.rule { border: none; border-top: 1px solid var(--rule); margin: 2.5rem 0; }
+.fg .rule { border: none; border-top: 1px solid var(--rule); margin: 2.5rem 0; }
 
 /* ── Footer ── */
-footer {
+.fg footer {
   background: var(--white);
   border-top: 1px solid var(--rule);
   padding: 1.75rem 2rem;
   text-align: center;
 }
 
-footer p {
+.fg footer p {
   font-size: 0.8125rem;
   color: var(--ink-soft);
   margin: 0;
 }
 
-footer a { font-size: 0.8125rem; }
+.fg footer a { font-size: 0.8125rem; }
 
 /* ── Responsive ── */
 @media (max-width: 600px) {
-  .hero h2 { font-size: 1.75rem; }
-  .callout-card { flex-direction: column; gap: 0.5rem; }
+  .fg .hero h2 { font-size: 1.75rem; }
+  .fg .callout-card { flex-direction: column; gap: 0.5rem; }
 }
