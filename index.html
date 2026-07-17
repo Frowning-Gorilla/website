@@ -10,15 +10,25 @@
     /* Homepage-only. The app cards and the logo lockup exist nowhere else;
        everything else comes from styles.css. */
 
-    .wordmark img {
+    /* Transparent SVG mark + the company name as live text — sharper and more
+       accessible than a baked-in wordmark image, and it mirrors the mark +
+       header-text pattern the app sub-pages use. The mark is a detailed navy
+       illustration, so it sits bare on the light header rather than reversed
+       white-on-accent inside an .app-icon tile. */
+    .logo-mark {
       display: block;
-      width: 220px;
+      width: 56px;
       height: auto;
-      /* The logo is a JPEG with a light-grey background baked in (#e7eaec) and
-         no transparency. That's near-identical to --rule, so it's framed as a
-         deliberate tile rather than left to read as a stray grey box. Replace
-         this rule if a transparent logo ever lands. */
-      border-radius: 10px;
+      flex-shrink: 0;
+    }
+
+    .wordmark {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 1.6rem;
+      font-weight: 400;
+      color: var(--ink);
+      letter-spacing: -0.02em;
+      line-height: 1;
     }
 
     .apps {
@@ -50,7 +60,8 @@
     .app-card .card-link { margin-top: 0.75rem; }
 
     @media (max-width: 600px) {
-      .wordmark img { width: 170px; }
+      .logo-mark { width: 44px; }
+      .wordmark { font-size: 1.3rem; }
       .app-card { padding: 1.25rem 1.25rem; }
     }
   </style>
@@ -59,7 +70,8 @@
 
 <header>
   <div class="header-inner">
-    <h1 class="wordmark"><img src="frowning-gorilla-logo.jpg" alt="Frowning Gorilla Ltd"></h1>
+    <img class="logo-mark" src="frowning-gorilla-logo.svg" alt="" width="56" height="55">
+    <h1 class="wordmark">Frowning Gorilla</h1>
   </div>
 </header>
 
