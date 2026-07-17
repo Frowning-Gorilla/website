@@ -36,10 +36,14 @@ The site currently makes **zero external requests**. Fonts are self-hosted (`fon
 - **Tone: plain, direct, honest.** No marketing fluff. No invented praise, testimonials, awards, or user numbers. Don't claim anything that isn't true.
 - **First person plural — "we".** But **never imply headcount**: no "our team", "the folks at Frowning Gorilla", or similar. Equally, no "solo studio" framing. Just "we".
 - **Prices are never hardcoded into copy without a note of where else they'd need updating** — App Store Connect, in-app copy, and any other page carrying the same figure. If you write a price, write the note.
-- **The commercial model is enumerated in exactly three places**, and nowhere else: the Shape n Ship **landing page** (pricing section), its **terms** (callout summary and body), and its **support FAQ**. Each states it in its own register but with **identical substance**:
+- **Each app's commercial model has its own rule. They are different models — don't merge them.**
+- **Shape n Ship's model is enumerated in exactly three places**, and nowhere else: the **landing page** (pricing section), its **terms** (callout summary and body), and its **support FAQ**. Each states it in its own register but with **identical substance**:
   - **Free** — one project, through concept, development and testing.
   - **Pro** — everything from release prep onward (shipping, submission, promotion), plus **unlimited active projects**. "Active" is load-bearing: the lapse clause turns on active vs archived/read-only, so "unlimited projects" contradicts it.
   - **No other page makes free-tier claims at all.** The privacy page describes **payment handling only** — never tiers, prices, or trials. It was trimmed for exactly this reason: "there is no free trial" is a commercial fact that already changed once, and a privacy page has no business being on the list of things to update when the model moves.
+- **Nearing's model lives canonically in `nearing-support.html`** ("What do I get with Nearing Premium?"): free gives three simultaneous countdowns, teal only, standard widget size, fully opaque; Premium is a **one-time purchase** unlocking unlimited countdowns, all eleven background colours, rainbow and single-colour rings, the compact size, adjustable opacity, and no upgrade prompts. One purchase covers Mac, iPhone and iPad, and Family Sharing works. Spoken announcements, large-text mode, always-on-top and the completion animation are free for everyone.
+  - `nearing.html` carries a deliberate **subset**, not a parallel copy: *"Free for your first three countdowns. Premium unlocks the rest, once."* A subset can't drift into contradiction the way a second full copy can. **Don't expand it** into a feature breakdown — link to the FAQ instead.
+  - **Nearing names no price anywhere on the site.** Adding one makes that page the first thing to keep in sync with App Store Connect.
 - **Availability lives in one place.** An app is presented as buyable only by the presence of its store badge — never in prose. That keeps publishing a one-line change instead of a hunt through copy. See the badge slots in `index.html` and `shape-n-ship.html`.
   - A **pre-launch status line** may sit directly under a badge slot ("Launching soon on the App Store."). It must be **deleted in the same commit that adds the badge** — the two must never both appear. It lives next to the slot so the swap stays a single, atomic edit.
 - **Heading levels must not skip.** On most pages the app name in the header is the `h1`, the hero is `h2`, sections are `h3`. On a landing page the hero headline takes the `h1` (the app name uses `.brand`), so sections are `h2` and cards `h3`. `styles.css` gives `.fg main h2` and `.fg h3` the same treatment for exactly this reason.
@@ -59,14 +63,14 @@ The site currently makes **zero external requests**. Fonts are self-hosted (`fon
 | `site-privacy.html` | — | Site-level privacy note. Linked from footers |
 | `support.html` | Eve Countdown | Support & FAQ — **frozen**, see Known state |
 | `privacy-policy.html` | Eve Countdown | Privacy policy — **frozen**, see Known state |
-| `nearing-support.html` | Nearing | Support & FAQ |
+| `nearing.html` | Nearing | Landing page. Pricing line is a subset of the FAQ |
+| `nearing-support.html` | Nearing | Support & FAQ. Canonical Nearing model |
 | `nearing-privacy.html` | Nearing | Privacy policy |
 | `shape-n-ship.html` | Shape n Ship | Landing page. Third place stating the model |
 | `shape-n-ship-support.html` | Shape n Ship | Support & FAQ |
 | `shape-n-ship-privacy.html` | Shape n Ship | Privacy policy |
 | `shape-n-ship-terms.html` | Shape n Ship | Terms of use |
 
-Not built yet: `nearing.html`.
 
 Newer app pages are namespaced by app (`<app>-<purpose>.html`); `support.html` and `privacy-policy.html` are unprefixed for historical reasons and are **Eve Countdown's** pages. Treat that inconsistency as load-bearing until the URLs are deliberately migrated.
 

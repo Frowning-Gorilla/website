@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nearing — countdowns that live on your desktop</title>
+  <meta name="description" content="Nearing puts the dates that matter right on your Mac — floating countdowns, always in view, no app to open. With companion widgets for iPhone and iPad.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="fg theme-nearing">
+
+<!--
+  Every claim below is grounded in nearing-support.html or nearing-privacy.html.
+  Nothing is carried over from the predecessor's old marketing — its stated
+  requirements differed (macOS 14 vs Nearing's macOS 13), which is exactly the
+  trap. If you add a feature claim here, it must be true of Nearing specifically.
+
+  The page leads on persistent desktop presence throughout. That is the product's
+  actual differentiator and it is the line the site should hold consistently.
+
+  Pricing here is a deliberate SUBSET of the canonical formula, which lives in
+  the support FAQ. A subset cannot contradict its source; a parallel copy can.
+  Don't expand it into a full free/Premium breakdown. See CLAUDE.md.
+-->
+
+<header>
+  <div class="header-inner">
+    <div class="app-icon">
+      <!-- Countdown ring mark in SVG -->
+      <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="14" cy="14" r="10" stroke="white" stroke-width="2.5"
+                stroke-linecap="round" stroke-dasharray="52 10"
+                transform="rotate(-90 14 14)"/>
+        <circle cx="7.5" cy="19.5" r="2.4" fill="white"/>
+      </svg>
+    </div>
+    <div class="header-text">
+      <p class="brand">Nearing</p>
+      <p>for Mac, iPhone &amp; iPad</p>
+    </div>
+  </div>
+</header>
+
+<div class="hero">
+  <h1>Countdowns that live on your desktop.</h1>
+  <p>Nearing puts the dates that matter right on your Mac — beautiful floating countdowns, always in view, no app to open. With companion widgets for iPhone and iPad.</p>
+
+  <!-- STORE BADGE SLOT — add the App Store badge here when a link exists.
+       PRE-LAUNCH ONLY: delete the "Launching soon" line below in the SAME
+       commit that adds the badge. Those two must never both be present, and the
+       page must never claim availability in prose. See CLAUDE.md. -->
+  <p class="hero-status">Launching soon on the App Store.</p>
+</div>
+
+<!-- SCREENSHOT SLOT — hero: the floating desktop countdowns, leading the
+     differentiation. Awaiting fresh Nearing captures. -->
+
+<main>
+
+  <section>
+    <h2>Always in view</h2>
+    <p>A Nearing countdown is a floating window on your desktop, not a row in a list you have to go and open. It sits where you are already looking, so you notice it without deciding to — nothing to launch, no menubar to click, no notification to dismiss.</p>
+    <p>Drag a widget to any connected display and it remembers where you put it. Keep it above your other windows if you want it to stay put.</p>
+  </section>
+
+  <hr class="rule">
+
+  <section>
+    <h2>The Days Ring</h2>
+    <p>The large outer ring tracks the whole length of your wait, depleting as the event gets closer. It shows you the shape of the time remaining, not just a number counting down.</p>
+    <p>If you had already been waiting a while before you added the countdown, set a start date in the past and the ring reflects the real length of the wait rather than the moment you happened to type it in.</p>
+    <!-- SCREENSHOT SLOT — the Days Ring on a widget. -->
+  </section>
+
+  <hr class="rule">
+
+  <section>
+    <h2>It can tell you out loud</h2>
+    <p>Nearing reads the remaining time aloud, and changes what it says as the date approaches — weeks and days while the event is far off, down to hours, minutes and seconds on the final day.</p>
+    <p>Left to itself, it speaks up more often as you get closer, and always on the milestones: a week to go, a day, an hour. Prefer to decide yourself? Set a fixed interval instead, and use Quiet Hours to keep it silent overnight or while you're working.</p>
+  </section>
+
+  <hr class="rule">
+
+  <section>
+    <h2>On your iPhone and iPad</h2>
+    <p>Nearing is a single app across Mac, iPhone and iPad. Sign in to the same iCloud account and your countdowns appear by themselves — no export, no setup, no second purchase. Pin them to your Home Screen as widgets.</p>
+    <p>Countdowns are created and edited on the Mac. The iPhone and iPad app is for keeping them in view wherever you are.</p>
+  </section>
+
+  <hr class="rule">
+
+  <section>
+    <h2>Make it yours</h2>
+    <p>Eleven background colours and two widget sizes, rainbow or single-colour rings, and adjustable opacity — so a countdown can sit quietly on your desktop instead of dominating it.</p>
+    <!-- SCREENSHOT SLOT — colours and sizes. -->
+  </section>
+
+  <hr class="rule">
+
+  <section>
+    <h2>Pricing</h2>
+    <!--
+      SUBSET of the canonical formula in nearing-support.html. Two sentences, no
+      figures — Nearing names no price anywhere on the site, and adding one here
+      would make this the first place to keep in sync with App Store Connect.
+      Don't expand this into a free/Premium feature breakdown; link instead.
+    -->
+    <p>Free for your first three countdowns. Premium unlocks the rest, once.</p>
+    <p>The full breakdown of what Premium adds is in the <a href="nearing-support.html">support FAQ</a>.</p>
+  </section>
+
+  <hr class="rule">
+
+  <section>
+    <h2>Requirements</h2>
+    <p>Nearing requires macOS 13 Ventura or later on the Mac, and iOS 17 or later on iPhone and iPad.</p>
+  </section>
+
+</main>
+
+<footer>
+  <p>© 2026 Frowning Gorilla Ltd &nbsp;·&nbsp; <a href="nearing-support.html">Support</a> &nbsp;·&nbsp; <a href="nearing-privacy.html">Privacy Policy</a> &nbsp;·&nbsp; <a href="site-privacy.html">Website privacy</a></p>
+</footer>
+
+</body>
+</html>

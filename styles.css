@@ -215,6 +215,19 @@ body.fg {
   font-weight: 300;
 }
 
+/* Pre-launch status line, directly under a badge slot. Inherits the hero
+   paragraph colour — don't fade it further. Deleted in the same commit that
+   adds the badge; see CLAUDE.md.
+
+   Must out-specify `.fg .hero p` (0,2,1), so this is `.fg .hero p.hero-status`
+   (0,3,1) rather than the obvious `.fg .hero-status` (0,2,0) — which loses, and
+   silently does nothing at all. */
+.fg .hero p.hero-status {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  margin-top: 1.5rem;
+}
+
 /* ── Callout card ── */
 .fg .callout {
   max-width: 720px;
