@@ -70,7 +70,12 @@
       color: var(--ink);
     }
 
-    .launch-note { color: var(--accent-deep); font-weight: 500; }
+    .launch-note {
+      color: var(--accent-deep);
+      font-weight: 500;
+      margin-top: 0.5rem;
+      margin-bottom: 0;
+    }
 
     .price-footnotes p { margin-top: 0.6rem; }
 
@@ -113,7 +118,7 @@
   <div class="callout-card">
     <div class="icon">⚑</div>
     <p>
-      Historically, roughly a third of first App Store submissions get rejected — and most indie apps die before launch day.
+      Historically, roughly a third of first App Store submissions get rejected — and plenty of indie apps never reach launch day at all.
       <span>The gap usually isn't the code. It's everything around it.</span>
     </p>
   </div>
@@ -205,7 +210,11 @@
       <div class="price-card pro">
         <h3>Pro</h3>
         <p>Pro unlocks shipping: the release checklist and its store-listing, privacy and App Review prompts, rejection help, the promotion module, and as many active projects as you want.</p>
-        <p class="price-line">Buy once — <strong>$34.99</strong> lifetime (Launch price <strong>$24.99</strong> — <span class="launch-note">rises to $34.99 shortly after launch.</span>) or subscribe — <strong>$19.99/year</strong>.</p>
+        <p class="price-line">Buy once — <strong>$34.99</strong> lifetime, or subscribe — <strong>$19.99/year</strong>.</p>
+        <!-- Today's price carries the visual weight: $24.99 is bold here, $34.99
+             is not. No strikethrough, no "was/now" — the launch price is framed
+             as a future increase, never as a discount. -->
+        <p class="launch-note">Launch price <strong>$24.99</strong> — rises to $34.99 shortly after launch.</p>
       </div>
 
     </div>
