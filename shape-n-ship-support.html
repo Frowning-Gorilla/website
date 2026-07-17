@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Support &amp; FAQ — Shape n Ship</title>
+  <meta name="description" content="Support and frequently asked questions for Shape n Ship, from Frowning Gorilla Ltd.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="fg theme-shape-n-ship">
+
+<!--
+  FAQ SKELETON — awaiting real content.
+
+  Every answer below is grounded in a fact already stated on shape-n-ship-terms
+  .html or shape-n-ship-privacy.html. Nothing here is invented. What's missing is
+  the how-to material only you can write — where things live in the UI, what
+  people actually get stuck on. Add those as further <details> blocks.
+
+  This page is one of exactly THREE places allowed to enumerate the commercial
+  model (with the landing page and the terms). Its answer states the same
+  substance in a support register. If you change the model, this page is on the
+  list. See CLAUDE.md.
+-->
+
+<header>
+  <div class="header-inner">
+    <div class="app-icon">
+      <svg viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="3.5" y="3.5" width="13" height="13" rx="3" stroke="white" stroke-width="2.4"/>
+        <rect x="9.5" y="9.5" width="13" height="13" rx="3" fill="white"/>
+      </svg>
+    </div>
+    <div class="header-text">
+      <h1>Shape n Ship</h1>
+      <p>for Mac, iPhone &amp; iPad</p>
+    </div>
+  </div>
+</header>
+
+<div class="hero">
+  <h2>Support &amp; FAQ</h2>
+  <p>Answers to the common questions, and a way to reach us.</p>
+</div>
+
+<main>
+
+  <section>
+    <h3>Common questions</h3>
+
+    <details>
+      <summary>What's free, and what do I get with Pro?</summary>
+      <div class="answer">
+        <p>Shape n Ship is free for one project, and that covers concept, development and testing — the whole stretch where you're working out what you're building and getting it working. There's no trial and no time limit, and the free tier never turns itself into a paid plan.</p>
+        <p>Pro picks up from release prep onward — shipping, submission and promotion — and lets you run unlimited active projects. You can buy it once and keep it, or subscribe yearly; both give you exactly the same thing.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Do I need an AI subscription or an API key?</summary>
+      <div class="answer">
+        <p>No. Shape n Ship writes the prompts; you run them wherever you already work — Claude, ChatGPT, Gemini, or anything else. There are no API keys to paste in and no AI fees on top of the app.</p>
+        <p>The app doesn't send anything to an AI service itself. Prompts are built on your device for you to copy and paste, so what you do with one is entirely your choice, governed by that tool's own terms.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Which devices does it run on?</summary>
+      <div class="answer">
+        <p>Mac, iPhone and iPad.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Where is my data stored? Can you see it?</summary>
+      <div class="answer">
+        <p>On your own device, and — if you're signed in to iCloud — synced to your own private iCloud database by Apple, which is what makes it appear across your Mac, iPhone and iPad. If you're not signed in, it simply stays on your device.</p>
+        <p>We can't see it. Not "we don't look" — we have no access to it at all, and we can't retrieve or recover it on your behalf. The <a href="shape-n-ship-privacy.html">Privacy Policy</a> spells this out.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Can I get my data out?</summary>
+      <div class="answer">
+        <p>Yes, at any time, whether or not you're paying. Shape n Ship exports your data as JSON or CSV. The files are written on your device and go wherever you choose to put them.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>What happens if my subscription lapses?</summary>
+      <div class="answer">
+        <p>One project of your choosing stays fully editable. Other active projects become read-only until you archive them, make one of them the active project instead, or restore Pro. Everything stays viewable and exportable throughout, and nothing is deleted.</p>
+        <p>Shape n Ship picks the editable project for you when a subscription first lapses, so you're never locked out of your work while you decide. The <a href="shape-n-ship-terms.html">Terms of Use</a> set this out in full.</p>
+      </div>
+    </details>
+
+    <!-- ADD HOW-TO QUESTIONS HERE — the UI-specific things people get stuck on. -->
+
+  </section>
+
+  <hr class="rule">
+
+  <section>
+    <h3>Get in touch</h3>
+    <div class="contact-card">
+      <p>Couldn't find what you needed above? Send us an <a id="contact-email" href="#">email</a> and we'll get back to you as soon as we can. It helps if you mention your macOS or iOS version and a short description of what's happening.</p>
+    </div>
+    <!-- Contact is an email link, obfuscated by the script at the foot of the page.
+         The site has no forms and no form service — see site-privacy.html. -->
+  </section>
+
+</main>
+
+<footer>
+  <p>© 2026 Frowning Gorilla Ltd &nbsp;·&nbsp; <a href="shape-n-ship-privacy.html">Privacy Policy</a> &nbsp;·&nbsp; <a href="shape-n-ship-terms.html">Terms of Use</a> &nbsp;·&nbsp; <a href="site-privacy.html">Website privacy</a></p>
+</footer>
+
+<script>
+  // Keeps the address out of the page source. Same pattern as the other pages.
+  (function () {
+    var user = 'support';
+    var domain = 'frowning-gorilla.com';
+    var link = document.getElementById('contact-email');
+    if (link) {
+      link.href = 'mailto:' + user + '@' + domain;
+    }
+  })();
+</script>
+
+</body>
+</html>

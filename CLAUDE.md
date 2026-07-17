@@ -59,10 +59,11 @@ The site currently makes **zero external requests**. Fonts are self-hosted (`fon
 | `privacy-policy.html` | Eve Countdown | Privacy policy — **frozen**, see Known state |
 | `nearing-support.html` | Nearing | Support & FAQ |
 | `nearing-privacy.html` | Nearing | Privacy policy |
+| `shape-n-ship-support.html` | Shape n Ship | Support & FAQ |
 | `shape-n-ship-privacy.html` | Shape n Ship | Privacy policy |
 | `shape-n-ship-terms.html` | Shape n Ship | Terms of use |
 
-Not built yet: `shape-n-ship.html`, `shape-n-ship-support.html`, `nearing.html`.
+Not built yet: `shape-n-ship.html`, `nearing.html`.
 
 Newer app pages are namespaced by app (`<app>-<purpose>.html`); `support.html` and `privacy-policy.html` are unprefixed for historical reasons and are **Eve Countdown's** pages. Treat that inconsistency as load-bearing until the URLs are deliberately migrated.
 
@@ -72,7 +73,7 @@ Newer app pages are namespaced by app (`<app>-<purpose>.html`); `support.html` a
 
 Everything except `@font-face` is scoped to `.fg`, so the file cannot reach a page that still carries its own inline CSS. **That scope is load-bearing.** Unscoped, a single `strong` rule reached the frozen Eve pages and reflowed one 148px taller. Pages that haven't migrated link the file for the self-hosted fonts alone and must not add the class.
 
-- **Opted in** (`class="fg"`): `index.html`, `site-privacy.html`, `shape-n-ship-privacy.html`, `shape-n-ship-terms.html`.
+- **Opted in** (`class="fg"`): `index.html`, `site-privacy.html`, `shape-n-ship-support.html`, `shape-n-ship-privacy.html`, `shape-n-ship-terms.html`.
 - **Fonts only** (inline CSS retained): `nearing-support.html`, `nearing-privacy.html`, and both frozen Eve pages.
 
 Accents come in pairs and the distinction matters: `--accent` is brand colour for fills and bullets, `--accent-deep` is for anything a person reads. The brand accents **fail WCAG AA as text** (teal `#19BAB0` is 2.31:1, orange `#E0641C` is 3.35:1). Using `--accent` for text is a bug, not a style choice. Per-app themes: `theme-nearing` (teal), `theme-shape-n-ship` (orange), no class = company indigo `#3E4C7A`.
@@ -90,5 +91,4 @@ Recorded so it isn't rediscovered each time. Not a licence to fix these unprompt
 - **No app is currently on the App Store.** Eve is delisted, Nearing is rejected and under appeal, Shape n Ship hasn't launched. **Do not add a store badge or link until a listing is confirmed live** — a badge pointing at nothing is the same bug as the dead Eve link that used to be on the homepage.
 - **Shape n Ship's launch price is worded without a date** — "Launch price — rises to $34.99 shortly after launch." Dateless so nothing broken can ship, bounded so it doesn't read as an evergreen sale. **When the App Store Connect temporary price change is scheduled, that line gets the real end date in the same commit that updates the promo text.**
 - Prices are shown in **USD only**, with "(or local equivalent)". The GBP base in App Store Connect and the USD storefront currently share the same numerals — that's a property of Apple's current price matrix, **not a rule**. Never derive one currency from the other; read the US row.
-- **Shape n Ship has no support page**, though Apple requires a support URL.
 - The git remote is still named `eve-countdown-site`.
