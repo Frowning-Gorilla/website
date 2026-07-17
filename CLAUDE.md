@@ -76,8 +76,8 @@ Newer app pages are namespaced by app (`<app>-<purpose>.html`); `support.html` a
 
 Everything except `@font-face` is scoped to `.fg`, so the file cannot reach a page that still carries its own inline CSS. **That scope is load-bearing.** Unscoped, a single `strong` rule reached the frozen Eve pages and reflowed one 148px taller. Pages that haven't migrated link the file for the self-hosted fonts alone and must not add the class.
 
-- **Opted in** (`class="fg"`): `index.html`, `site-privacy.html`, `shape-n-ship.html`, `shape-n-ship-support.html`, `shape-n-ship-privacy.html`, `shape-n-ship-terms.html`.
-- **Fonts only** (inline CSS retained): `nearing-support.html`, `nearing-privacy.html`, and both frozen Eve pages.
+- **Opted in** (`class="fg"`): every page except the two frozen Eve pages.
+- **Fonts only** (inline CSS retained): `support.html` and `privacy-policy.html` — the frozen Eve pages. They link the file for the self-hosted fonts alone and must never gain the class.
 
 Accents come in pairs and the distinction matters: `--accent` is brand colour for fills and bullets, `--accent-deep` is for anything a person reads. The brand accents **fail WCAG AA as text** (teal `#19BAB0` is 2.31:1, orange `#E0641C` is 3.35:1). Using `--accent` for text is a bug, not a style choice. Per-app themes: `theme-nearing` (teal), `theme-shape-n-ship` (orange), no class = company indigo `#3E4C7A`.
 
@@ -96,4 +96,5 @@ Recorded so it isn't rediscovered each time. Not a licence to fix these unprompt
 - **No app is currently on the App Store.** Eve is delisted, Nearing is rejected and under appeal, Shape n Ship hasn't launched. **Do not add a store badge or link until a listing is confirmed live** — a badge pointing at nothing is the same bug as the dead Eve link that used to be on the homepage.
 - **Shape n Ship's launch price is worded without a date** — "Launch price — rises to $34.99 shortly after launch." Dateless so nothing broken can ship, bounded so it doesn't read as an evergreen sale. **When the App Store Connect temporary price change is scheduled, that line gets the real end date in the same commit that updates the promo text.**
 - Prices are shown in **USD only**, with "(or local equivalent)". The GBP base in App Store Connect and the USD storefront currently share the same numerals — that's a property of Apple's current price matrix, **not a rule**. Never derive one currency from the other; read the US row.
+- **Nearing has no terms page, deliberately** — the standard Apple EULA suffices for its one-time in-app purchase, which is not an auto-renewable subscription. The asymmetry with Shape n Ship (which has one) is intentional, not an oversight.
 - The git remote is still named `eve-countdown-site`.
