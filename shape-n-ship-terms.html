@@ -71,6 +71,12 @@
       <li><strong>Lifetime unlock.</strong> A one-time purchase that adds release prep, submission tooling, promotion, and unlimited projects. It does not expire and it does not renew.</li>
       <li><strong>Annual subscription.</strong> An auto-renewable subscription giving the same additions for as long as it runs. It renews automatically at the price shown at purchase unless you cancel at least 24 hours before the end of the current period.</li>
     </ul>
+    <!--
+      "Pro" is defined here because the lapse clause below relies on it. Without
+      this line it is an undefined term in operative text. If the app doesn't
+      actually call the paid state Pro, fix this and the lapse clause together.
+    -->
+    <p>The lifetime unlock and the annual subscription both give you the same thing; either one is referred to below as <strong>Pro</strong>.</p>
     <p>All billing is handled by Apple through your App Store account. You can view, manage, or cancel a subscription at any time in <strong>Settings → Apple ID → Subscriptions</strong> on your device.</p>
     <p>Prices may change in future. Any change will be applied in accordance with App Store rules, and existing subscribers will be notified or asked to consent as those rules require.</p>
     <p>Frowning Gorilla does not process or receive any payment information. Refunds are handled by Apple in accordance with App Store policy; we cannot issue refunds directly.</p>
@@ -78,30 +84,9 @@
 
   <section>
     <h3>What happens if a subscription ends</h3>
-    <!--
-      UNCONFIRMED — DO NOT PUBLISH WITHOUT CHECKING.
-
-      Confirmed: an annual that lapses falls back to the free tier; the lifetime
-      unlock never expires; the free tier is one project.
-
-      Inferred below: what becomes of projects beyond the first when a
-      multi-project user lapses. It follows from the two confirmed facts (free
-      tier = one project, and we never delete data), and it matches the
-      read-only behaviour the previous terms promised — but it was never
-      actually confirmed.
-
-      Also unspecified: WHICH project stays active. The user's choice, or the
-      app's? The wording below deliberately avoids saying, which is a gap a
-      reader could reasonably complain about.
-    -->
     <p>The <strong>lifetime unlock does not expire</strong>, so none of this applies to it.</p>
-    <p>If an <strong>annual subscription</strong> ends and is not renewed, Shape n Ship returns to the free tier — one active project, through concept and development.</p>
-    <ul>
-      <li>You can still <strong>view</strong> all of your existing data.</li>
-      <li>You can still <strong>export</strong> your data at any time.</li>
-      <li>Anything beyond the free tier becomes <strong>read-only</strong>: you can view and export it, but not edit it, until you resubscribe or buy the lifetime unlock.</li>
-    </ul>
-    <p>We will never delete your data because a subscription has lapsed. Your content remains available to view and export.</p>
+    <p>If a subscription lapses, one project of your choosing remains fully editable; other active projects become read-only until archived, reactivated in its place, or Pro is restored. All projects remain viewable and exportable at all times, and nothing is deleted.</p>
+    <p>Shape n Ship picks the editable project for you when a subscription first lapses, so you are never locked out of your work while you decide. You can change which project is active at any time — each read-only project offers a "make this the active project" action.</p>
   </section>
 
   <section>
