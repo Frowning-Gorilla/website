@@ -5,243 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Privacy Policy — Shape n Ship</title>
   <link rel="stylesheet" href="styles.css">
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --orange:       #E0641C;
-      --orange-light: #fdf1e9;
-      --orange-mid:   #f5cdaf;
-      --orange-deep:  #B0470F;
-      --ink:        #1a1f2e;
-      --ink-mid:    #4a5168;
-      --ink-soft:   #8a90a2;
-      --rule:       #e8eaf0;
-      --bg:         #fafafa;
-      --white:      #ffffff;
-    }
-
-    html { font-size: 16px; }
-
-    body {
-      font-family: 'DM Sans', system-ui, sans-serif;
-      background: var(--bg);
-      color: var(--ink);
-      line-height: 1.7;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* ── Header ── */
-    header {
-      background: var(--white);
-      border-bottom: 1px solid var(--rule);
-      padding: 0 2rem;
-    }
-
-    .header-inner {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 2rem 0 1.75rem;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .app-icon {
-      width: 48px;
-      height: 48px;
-      background: var(--orange);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
-    .app-icon svg {
-      width: 26px;
-      height: 26px;
-    }
-
-    .header-text h1 {
-      font-family: 'DM Serif Display', Georgia, serif;
-      font-size: 1.5rem;
-      font-weight: 400;
-      color: var(--ink);
-      letter-spacing: -0.02em;
-      line-height: 1.2;
-    }
-
-    .header-text p {
-      font-size: 0.8125rem;
-      color: var(--ink-soft);
-      margin-top: 0.2rem;
-      font-weight: 400;
-    }
-
-    /* ── Hero band ── */
-    .hero {
-      background: var(--orange);
-      padding: 3rem 2rem;
-      text-align: center;
-    }
-
-    .hero h2 {
-      font-family: 'DM Serif Display', Georgia, serif;
-      font-size: 2.25rem;
-      font-weight: 400;
-      color: var(--white);
-      letter-spacing: -0.03em;
-      line-height: 1.15;
-    }
-
-    .hero p {
-      color: rgba(255,255,255,0.85);
-      font-size: 1.0625rem;
-      margin-top: 0.75rem;
-      font-weight: 300;
-    }
-
-    /* ── Callout card ── */
-    .callout {
-      max-width: 720px;
-      margin: 2.5rem auto 0;
-      padding: 0 2rem;
-    }
-
-    .callout-card {
-      background: var(--orange-light);
-      border: 1.5px solid var(--orange-mid);
-      border-radius: 14px;
-      padding: 1.5rem 1.75rem;
-      display: flex;
-      gap: 1rem;
-      align-items: flex-start;
-    }
-
-    .callout-card .icon {
-      font-size: 1.5rem;
-      flex-shrink: 0;
-      margin-top: 0.1rem;
-    }
-
-    .callout-card p {
-      font-size: 1rem;
-      color: var(--ink);
-      font-weight: 500;
-      line-height: 1.5;
-    }
-
-    .callout-card p span {
-      font-weight: 300;
-      color: var(--ink-mid);
-      display: block;
-      margin-top: 0.25rem;
-      font-size: 0.9375rem;
-    }
-
-    /* ── Main content ── */
-    main {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 2.5rem 2rem 5rem;
-    }
-
-    section {
-      margin-bottom: 2.75rem;
-    }
-
-    section:last-child {
-      margin-bottom: 0;
-    }
-
-    h3 {
-      font-family: 'DM Serif Display', Georgia, serif;
-      font-size: 1.3125rem;
-      font-weight: 400;
-      color: var(--ink);
-      letter-spacing: -0.02em;
-      margin-bottom: 0.75rem;
-      padding-bottom: 0.6rem;
-      border-bottom: 1px solid var(--rule);
-    }
-
-    h4 {
-      font-family: 'DM Sans', system-ui, sans-serif;
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--ink);
-      margin: 1.25rem 0 0.5rem;
-    }
-
-    p {
-      font-size: 0.9375rem;
-      color: var(--ink-mid);
-      margin-bottom: 0.75rem;
-      font-weight: 400;
-    }
-
-    p:last-child { margin-bottom: 0; }
-
-    strong { color: var(--ink); font-weight: 600; }
-
-    ul {
-      list-style: none;
-      margin: 0.5rem 0 0.75rem;
-      padding: 0;
-    }
-
-    ul li {
-      font-size: 0.9375rem;
-      color: var(--ink-mid);
-      padding: 0.35rem 0 0.35rem 1.5rem;
-      position: relative;
-    }
-
-    ul li::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0.7rem;
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--orange);
-    }
-
-    a {
-      color: var(--orange-deep);
-      text-decoration: none;
-      font-weight: 500;
-    }
-
-    a:hover { text-decoration: underline; }
-
-    .rule { border: none; border-top: 1px solid var(--rule); margin: 2.5rem 0; }
-
-    /* ── Footer ── */
-    footer {
-      background: var(--white);
-      border-top: 1px solid var(--rule);
-      padding: 1.75rem 2rem;
-      text-align: center;
-    }
-
-    footer p {
-      font-size: 0.8125rem;
-      color: var(--ink-soft);
-      margin: 0;
-    }
-
-    footer a { font-size: 0.8125rem; }
-
-    @media (max-width: 600px) {
-      .hero h2 { font-size: 1.75rem; }
-      .callout-card { flex-direction: column; gap: 0.5rem; }
-    }
-  </style>
 </head>
-<body>
+<body class="fg theme-shape-n-ship">
 
 <header>
   <div class="header-inner">
@@ -298,12 +63,12 @@
 
   <section>
     <h3>Exporting your data</h3>
-    <p>Shape n Ship lets you export your data (for example as JSON or CSV) at any time, including if your subscription has lapsed. Exported files are created on your own device and go wherever you choose to save them. Frowning Gorilla is not involved in and has no access to your exports.</p>
+    <p>Shape n Ship lets you export your data (for example as JSON or CSV) at any time — on the free tier, and if a subscription has lapsed. Exported files are created on your own device and go wherever you choose to save them. Frowning Gorilla is not involved in and has no access to your exports.</p>
   </section>
 
   <section>
-    <h3>Subscription and payment</h3>
-    <p>Shape n Ship is offered as an auto-renewable subscription with a free trial. All payment processing is handled entirely by Apple through the App Store. Frowning Gorilla does not handle, store, or have access to any payment information, and receives no payment or card details from Apple.</p>
+    <h3>Paying for Shape n Ship</h3>
+    <p>Shape n Ship has a free tier, a one-time lifetime unlock, and an optional annual subscription. There is no free trial. All payment processing is handled entirely by Apple through the App Store. Frowning Gorilla does not handle, store, or have access to any payment information, and receives no payment or card details from Apple.</p>
     <p>Apple's privacy policy applies to the purchase transaction. You can read it at <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">apple.com/legal/privacy</a>.</p>
   </section>
 
@@ -338,7 +103,7 @@
   <hr class="rule">
 
   <p style="font-size:0.8125rem; color: var(--ink-soft);">
-    Last updated: June 2026. Effective immediately.
+    Last updated: July 2026. Effective immediately.
   </p>
 
 </main>

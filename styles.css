@@ -258,6 +258,9 @@ body.fg {
 .fg section { margin-bottom: 2.75rem; }
 .fg section:last-child { margin-bottom: 0; }
 
+/* Lead-in paragraphs above the first rule on the legal pages. */
+.fg .intro p { margin-bottom: 0.85rem; }
+
 .fg h3 {
   font-family: 'DM Serif Display', Georgia, serif;
   font-size: 1.3125rem;
