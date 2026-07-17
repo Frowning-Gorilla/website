@@ -45,6 +45,10 @@
 
     .app-card p { margin-bottom: 0; }
 
+    /* Cards link to an app's page only once that page exists. Nearing has none
+       yet, so its card has no link — that's deliberate, not an oversight. */
+    .app-card .card-link { margin-top: 0.75rem; }
+
     @media (max-width: 600px) {
       .wordmark img { width: 170px; }
       .app-card { padding: 1.25rem 1.25rem; }
@@ -91,6 +95,7 @@
       <article class="app-card theme-shape-n-ship">
         <h4>Shape n Ship</h4>
         <p>Takes an app from idea to the App Store: reality-check the concept, track bugs and features, prep the release, get through App Review, and promote the launch.</p>
+        <p class="card-link"><a href="shape-n-ship.html">More about Shape n Ship →</a></p>
         <!-- STORE BADGE SLOT — add here when a link exists. Nothing else changes. -->
       </article>
 

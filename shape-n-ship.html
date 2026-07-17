@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shape n Ship — the missing half of vibe coding</title>
+  <meta name="description" content="AI writes your code. Shape n Ship walks you through everything else — shaping the idea, tracking the build, passing App Review, and launching properly. For Mac, iPhone and iPad.">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Landing-page only: the step list and the pricing block exist nowhere else.
+       Everything else comes from styles.css. */
+
+    /* Pre-launch status line under the badge slot. Inherits the hero paragraph
+       colour (0.92 white on --accent-deep, 5.02:1) — don't fade it further. */
+    .hero-status {
+      font-size: 0.9375rem;
+      font-weight: 500;
+      margin-top: 1.5rem;
+    }
+
+    .steps { display: grid; gap: 1.25rem; margin-top: 0.5rem; }
+
+    .step {
+      background: var(--white);
+      border: 1px solid var(--rule);
+      border-left: 4px solid var(--accent);
+      border-radius: 12px;
+      padding: 1.5rem 1.75rem;
+    }
+
+    .step-num {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent-deep);
+      display: block;
+      margin-bottom: 0.35rem;
+    }
+
+    .step h3,
+    .price-card h3 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 1.25rem;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      margin: 0 0 0.4rem;
+      /* the shared sheet gives h3 a rule beneath it; card headings don't want one */
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .step p { margin-bottom: 0; }
+
+    .prices { display: grid; gap: 1.25rem; margin-top: 0.5rem; }
+
+    .price-card {
+      background: var(--white);
+      border: 1px solid var(--rule);
+      border-radius: 12px;
+      padding: 1.5rem 1.75rem;
+    }
+
+    .price-card.pro { border-color: var(--accent-mid); border-width: 1.5px; }
+
+    .price-line {
+      margin-top: 0.9rem;
+      padding-top: 0.9rem;
+      border-top: 1px solid var(--rule);
+      color: var(--ink);
+    }
+
+    .launch-note { color: var(--accent-deep); font-weight: 500; }
+
+    .price-footnotes p { margin-top: 0.6rem; }
+
+    @media (max-width: 600px) {
+      .step, .price-card { padding: 1.25rem; }
+    }
+  </style>
+</head>
+<body class="fg theme-shape-n-ship">
+
+<header>
+  <div class="header-inner">
+    <div class="app-icon">
+      <svg viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="3.5" y="3.5" width="13" height="13" rx="3" stroke="white" stroke-width="2.4"/>
+        <rect x="9.5" y="9.5" width="13" height="13" rx="3" fill="white"/>
+      </svg>
+    </div>
+    <div class="header-text">
+      <p class="brand">Shape n Ship</p>
+      <p>for Mac, iPhone &amp; iPad</p>
+    </div>
+  </div>
+</header>
+
+<div class="hero">
+  <h1>The missing half of vibe coding.</h1>
+  <p>AI writes your code. Shape n Ship walks you through everything else — shaping the idea, tracking the build, passing App Review, and launching properly. On your Mac, iPhone and iPad.</p>
+
+  <!-- STORE BADGE SLOT — add the App Store badge here when a link exists.
+       PRE-LAUNCH ONLY: delete the "Launching soon" line below in the SAME
+       commit that adds the badge. Those two must never both be present, and the
+       page must never claim availability in prose. See CLAUDE.md. -->
+  <p class="hero-status">Launching soon on the App Store.</p>
+</div>
+
+<!-- SCREENSHOT SLOT — hero: the wizard mid-conversation-paste. -->
+
+<div class="callout">
+  <div class="callout-card">
+    <div class="icon">⚑</div>
+    <p>
+      Historically, roughly a third of first App Store submissions get rejected — and most indie apps die before launch day.
+      <span>The gap usually isn't the code. It's everything around it.</span>
+    </p>
+  </div>
+</div>
+
+<main>
+
+  <section>
+    <h2>How it works</h2>
+    <p>Four stages, in the order you actually hit them.</p>
+
+    <div class="steps">
+
+      <div class="step">
+        <span class="step-num">Step one</span>
+        <h3>Shape the idea</h3>
+        <p>A guided reality check with your AI before you write a line of code — problem, rivals, review risks, money. Not going ahead is a valid outcome; twenty minutes here can save weeks.</p>
+      </div>
+
+      <div class="step">
+        <span class="step-num">Step two</span>
+        <h3>Build it</h3>
+        <p>Track bugs, features and tests in one place, and kick off the project with a plan-first prompt that keeps the AI building small, shippable milestones.</p>
+        <!-- SCREENSHOT SLOT — step 2: the bug list. -->
+      </div>
+
+      <div class="step">
+        <span class="step-num">Step three</span>
+        <h3>Ship it</h3>
+        <p>The release checklist walks you to submission: store listing copy, App Privacy answers, deployment checks — and when Apple rejects, real help working out why and what to do.</p>
+        <!-- SCREENSHOT SLOT — step 3: the release checklist. -->
+      </div>
+
+      <div class="step">
+        <span class="step-num">Step four</span>
+        <h3>Launch it</h3>
+        <p>A channel strategy for your actual app, and ready-to-use tasks for working each channel.</p>
+        <!-- SCREENSHOT SLOT — step 4: promotion. -->
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <section>
+    <h2>Bring your own AI</h2>
+    <p>Shape n Ship doesn't bundle an AI or charge for one. It writes expert prompts, packed with your project's real context, and you run them in whatever you already use — ChatGPT, Claude, Gemini, or your coding tool.</p>
+    <p><strong>No API keys. No extra AI bills.</strong> Your data stays in your own iCloud.</p>
+    <p>That means you're never paying twice for the model you already have, and you're never stuck with whichever one we happened to pick. When you change tools, the prompts still work.</p>
+  </section>
+
+  <hr class="rule">
+
+  <section>
+    <h2>Pricing</h2>
+
+    <!--
+      PRICES — set in App Store Connect from a GBP base; Apple derives the other
+      storefronts. The figures here are the US storefront's, in USD. They are NOT
+      a conversion of the GBP base (UK prices include VAT, US prices don't) —
+      read them off the US row in App Store Connect, never calculate them.
+
+      The GBP base and the US storefront currently share the same numerals
+      (£34.99 / $34.99). That is a property of Apple's current price matrix, not
+      a rule: never derive one currency from the other, and don't assume they
+      stay matched.
+
+      If any figure or the commercial model changes, update all of:
+        - this page (free scope, Pro scope, lifetime, launch, annual)
+        - shape-n-ship-terms.html   (model only — deliberately carries no figures)
+        - shape-n-ship-support.html (the "What's free" answer)
+        - App Store Connect (GBP base + the US storefront row)
+        - in-app paywall copy
+      The privacy page is deliberately NOT on this list — payment handling only.
+
+      The launch price is worded without a date so nothing broken can ship. When
+      the ASC temporary price change is scheduled, the real end date lands here
+      in the same commit that updates the promo text. See CLAUDE.md.
+    -->
+
+    <div class="prices">
+
+      <div class="price-card">
+        <h3>Free</h3>
+        <p>Free for one project — from idea through building and testing, including the guided concept check and all development tracking.</p>
+      </div>
+
+      <div class="price-card pro">
+        <h3>Pro</h3>
+        <p>Pro unlocks shipping: the release checklist and its store-listing, privacy and App Review prompts, rejection help, the promotion module, and as many active projects as you want.</p>
+        <p class="price-line">Buy once — <strong>$34.99</strong> lifetime (Launch price <strong>$24.99</strong> — <span class="launch-note">rises to $34.99 shortly after launch.</span>) or subscribe — <strong>$19.99/year</strong>.</p>
+      </div>
+
+    </div>
+
+    <div class="price-footnotes">
+      <p>No trial — the free tier is the trial.</p>
+      <p>Your data stays visible and exportable whether or not you're paying.</p>
+      <p>Prices shown in USD (or local equivalent).</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>© 2026 Frowning Gorilla Ltd &nbsp;·&nbsp; <a href="shape-n-ship-support.html">Support</a> &nbsp;·&nbsp; <a href="shape-n-ship-privacy.html">Privacy Policy</a> &nbsp;·&nbsp; <a href="shape-n-ship-terms.html">Terms of Use</a> &nbsp;·&nbsp; <a href="site-privacy.html">Website privacy</a></p>
+</footer>
+
+</body>
+</html>

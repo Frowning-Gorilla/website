@@ -40,7 +40,9 @@ The site currently makes **zero external requests**. Fonts are self-hosted (`fon
   - **Free** — one project, through concept, development and testing.
   - **Pro** — everything from release prep onward (shipping, submission, promotion), plus **unlimited active projects**. "Active" is load-bearing: the lapse clause turns on active vs archived/read-only, so "unlimited projects" contradicts it.
   - **No other page makes free-tier claims at all.** The privacy page describes **payment handling only** — never tiers, prices, or trials. It was trimmed for exactly this reason: "there is no free trial" is a commercial fact that already changed once, and a privacy page has no business being on the list of things to update when the model moves.
-- **Availability lives in one place.** An app is presented as buyable only by the presence of its store badge — never in prose. That keeps publishing a one-line change instead of a hunt through copy. See the badge slots in `index.html`.
+- **Availability lives in one place.** An app is presented as buyable only by the presence of its store badge — never in prose. That keeps publishing a one-line change instead of a hunt through copy. See the badge slots in `index.html` and `shape-n-ship.html`.
+  - A **pre-launch status line** may sit directly under a badge slot ("Launching soon on the App Store."). It must be **deleted in the same commit that adds the badge** — the two must never both appear. It lives next to the slot so the swap stays a single, atomic edit.
+- **Heading levels must not skip.** On most pages the app name in the header is the `h1`, the hero is `h2`, sections are `h3`. On a landing page the hero headline takes the `h1` (the app name uses `.brand`), so sections are `h2` and cards `h3`. `styles.css` gives `.fg main h2` and `.fg h3` the same treatment for exactly this reason.
 
 ## Structure conventions
 
@@ -59,11 +61,12 @@ The site currently makes **zero external requests**. Fonts are self-hosted (`fon
 | `privacy-policy.html` | Eve Countdown | Privacy policy — **frozen**, see Known state |
 | `nearing-support.html` | Nearing | Support & FAQ |
 | `nearing-privacy.html` | Nearing | Privacy policy |
+| `shape-n-ship.html` | Shape n Ship | Landing page. Third place stating the model |
 | `shape-n-ship-support.html` | Shape n Ship | Support & FAQ |
 | `shape-n-ship-privacy.html` | Shape n Ship | Privacy policy |
 | `shape-n-ship-terms.html` | Shape n Ship | Terms of use |
 
-Not built yet: `shape-n-ship.html`, `nearing.html`.
+Not built yet: `nearing.html`.
 
 Newer app pages are namespaced by app (`<app>-<purpose>.html`); `support.html` and `privacy-policy.html` are unprefixed for historical reasons and are **Eve Countdown's** pages. Treat that inconsistency as load-bearing until the URLs are deliberately migrated.
 
@@ -73,7 +76,7 @@ Newer app pages are namespaced by app (`<app>-<purpose>.html`); `support.html` a
 
 Everything except `@font-face` is scoped to `.fg`, so the file cannot reach a page that still carries its own inline CSS. **That scope is load-bearing.** Unscoped, a single `strong` rule reached the frozen Eve pages and reflowed one 148px taller. Pages that haven't migrated link the file for the self-hosted fonts alone and must not add the class.
 
-- **Opted in** (`class="fg"`): `index.html`, `site-privacy.html`, `shape-n-ship-support.html`, `shape-n-ship-privacy.html`, `shape-n-ship-terms.html`.
+- **Opted in** (`class="fg"`): `index.html`, `site-privacy.html`, `shape-n-ship.html`, `shape-n-ship-support.html`, `shape-n-ship-privacy.html`, `shape-n-ship-terms.html`.
 - **Fonts only** (inline CSS retained): `nearing-support.html`, `nearing-privacy.html`, and both frozen Eve pages.
 
 Accents come in pairs and the distinction matters: `--accent` is brand colour for fills and bullets, `--accent-deep` is for anything a person reads. The brand accents **fail WCAG AA as text** (teal `#19BAB0` is 2.31:1, orange `#E0641C` is 3.35:1). Using `--accent` for text is a bug, not a style choice. Per-app themes: `theme-nearing` (teal), `theme-shape-n-ship` (orange), no class = company indigo `#3E4C7A`.
