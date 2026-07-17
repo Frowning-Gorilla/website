@@ -9,6 +9,7 @@ Plain static site, hosted on **GitHub Pages**, served on a **custom domain** (`w
 **Pushing to the default branch deploys to the live site.** There is no staging environment.
 
 - **Never push without explicit approval.** Commits are fine and can be made freely; pushes are releases.
+- **The site is already live and public.** "Not promoted" is not "not published" — anything pushed is immediately readable by anyone, including App Review.
 - The DNS configuration at Namecheap is already set up correctly. Don't touch it, and don't suggest changes to it.
 - **Never modify or delete `CNAME`.** It is the custom domain binding — removing it takes the site off its domain.
 
@@ -20,17 +21,22 @@ Plain static site, hosted on **GitHub Pages**, served on a **custom domain** (`w
 - If a change would add a request to a third-party origin, stop and ask first.
 - **Images: optimise before committing** (target well under 300 KB each), descriptive filenames.
 
+The site currently makes **zero external requests**. Fonts are self-hosted (`fonts/`), there is no analytics, and there is no form service. That's a claim `site-privacy.html` makes in public — if you add an external request, that page becomes a lie and must change in the same commit.
+
 ## Working method
 
 - **Plan first on any multi-file change.** Propose the approach and wait for approval before implementing.
 - Small, reviewable changes over sweeping rewrites.
 - **After moving or renaming anything, verify links and image paths.** Check every internal `href` and `src` still resolves.
+- **Keep this file current in the same commit as the change it describes** — the pages table and Known State below go stale fast and silently.
 
 ## Copy conventions
 
 - **British English throughout** (colour, organise, licence as noun, -ise endings).
 - **Tone: plain, direct, honest.** No marketing fluff. No invented praise, testimonials, awards, or user numbers. Don't claim anything that isn't true.
+- **First person plural — "we".** But **never imply headcount**: no "our team", "the folks at Frowning Gorilla", or similar. Equally, no "solo studio" framing. Just "we".
 - **Prices are never hardcoded into copy without a note of where else they'd need updating** — App Store Connect, in-app copy, and any other page carrying the same figure. If you write a price, write the note.
+- **Availability lives in one place.** An app is presented as buyable only by the presence of its store badge — never in prose. That keeps publishing a one-line change instead of a hunt through copy. See the badge slots in `index.html`.
 
 ## Structure conventions
 
@@ -43,34 +49,42 @@ Plain static site, hosted on **GitHub Pages**, served on a **custom domain** (`w
 
 | URL | App | Purpose |
 |---|---|---|
-| `index.html` | — | Homepage |
-| `support.html` | Eve Countdown | Support & FAQ (has a Formspree contact form) |
-| `privacy-policy.html` | Eve Countdown | Privacy policy |
+| `index.html` | — | Company front: intro, app cards, contact |
+| `site-privacy.html` | — | Site-level privacy note. Linked from footers |
+| `support.html` | Eve Countdown | Support & FAQ — **frozen**, see Known state |
+| `privacy-policy.html` | Eve Countdown | Privacy policy — **frozen**, see Known state |
 | `nearing-support.html` | Nearing | Support & FAQ |
 | `nearing-privacy.html` | Nearing | Privacy policy |
 | `shape-n-ship-privacy.html` | Shape n Ship | Privacy policy |
 | `shape-n-ship-terms.html` | Shape n Ship | Terms of use |
 
+Not built yet: `shape-n-ship.html`, `shape-n-ship-support.html`, `nearing.html`.
+
 Newer app pages are namespaced by app (`<app>-<purpose>.html`); `support.html` and `privacy-policy.html` are unprefixed for historical reasons and are **Eve Countdown's** pages. Treat that inconsistency as load-bearing until the URLs are deliberately migrated.
 
 ### Styling
 
-Every page is self-contained: its CSS lives in a `<style>` block in its own `<head>`. There is no shared stylesheet. Two design systems currently coexist:
+`styles.css` is the shared stylesheet. Adopt it with a `<link>` **and** `class="fg"` on `<body>`.
 
-- **`index.html`** — dark theme (navy `#0d1117` / teal `#3ecfb2`), Syne + DM Sans.
-- **All sub-pages** — light theme (`#fafafa` / ink `#1a1f2e`), DM Sans + DM Serif Display, with a per-app accent: teal `#19BAB0` (Eve, Nearing), orange `#E0641C` (Shape n Ship).
+Everything except `@font-face` is scoped to `.fg`, so the file cannot reach a page that still carries its own inline CSS. **That scope is load-bearing.** Unscoped, a single `strong` rule reached the frozen Eve pages and reflowed one 148px taller. Pages that haven't migrated link the file for the self-hosted fonts alone and must not add the class.
 
-Match the page you are editing. Changing a design system across pages is a multi-file change — plan and get approval first.
+- **Opted in** (`class="fg"`): `index.html`, `site-privacy.html`, `shape-n-ship-privacy.html`, `shape-n-ship-terms.html`.
+- **Fonts only** (inline CSS retained): `nearing-support.html`, `nearing-privacy.html`, and both frozen Eve pages.
+
+Accents come in pairs and the distinction matters: `--accent` is brand colour for fills and bullets, `--accent-deep` is for anything a person reads. The brand accents **fail WCAG AA as text** (teal `#19BAB0` is 2.31:1, orange `#E0641C` is 3.35:1). Using `--accent` for text is a bug, not a style choice. Per-app themes: `theme-nearing` (teal), `theme-shape-n-ship` (orange), no class = company indigo `#3E4C7A`.
+
+A page may keep a small local `<style>` block only for rules genuinely unique to it (e.g. the homepage's app cards).
 
 ## Known state
 
 Recorded so it isn't rediscovered each time. Not a licence to fix these unprompted.
 
-- **Pending decision:** Google Fonts (all pages) and Formspree (support form) predate the no-external-dependencies rule; a decision on each is owed during the restructure.
-- The homepage is **entirely Eve Countdown** and mentions neither Shape n Ship nor Nearing.
+- **Nearing is the renamed Eve Countdown** — same app. This is deliberately invisible to the public.
+- **The Eve pages are frozen deliberately. No succession messaging — do not add any.** Eve purchases don't carry to Nearing, and the rebrand is deliberately not announced to Eve users. The pages stay live at their existing URLs (load-bearing), stay undiscoverable from the homepage, and there is **no public linkage between Eve and Nearing in either direction** — including shared asset URLs, which is why Nearing has its own copies of the shared screenshots.
+  - Exception, already used once with approval: something **functionally broken** (not merely stale) may be fixed. The Formspree form was replaced with an email link on that basis, since decommissioning the service would have broken it silently.
+  - Consequence, accepted: the Eve pages keep low-contrast teal text (2.31:1). Visual stability beat the accessibility fix.
+- **No app is currently on the App Store.** Eve is delisted, Nearing is rejected and under appeal, Shape n Ship hasn't launched. **Do not add a store badge or link until a listing is confirmed live** — a badge pointing at nothing is the same bug as the dead Eve link that used to be on the homepage.
+- **Shape n Ship's launch price is worded without a date** — "Launch price — rises to $34.99 shortly after launch." Dateless so nothing broken can ship, bounded so it doesn't read as an evergreen sale. **When the App Store Connect temporary price change is scheduled, that line gets the real end date in the same commit that updates the promo text.**
+- Prices are shown in **USD only**, with "(or local equivalent)". The GBP base in App Store Connect and the USD storefront currently share the same numerals — that's a property of Apple's current price matrix, **not a rule**. Never derive one currency from the other; read the US row.
 - **Shape n Ship has no support page**, though Apple requires a support URL.
-- All app pages except the homepage are **orphaned** — nothing links to them from `index.html`.
 - The git remote is still named `eve-countdown-site`.
-- `index.html` line ~616: the Apple logo SVG `path` data contains the literal word `blurb`, which corrupts it.
-- `nearing-support.html` references its images by **absolute** `https://www.frowning-gorilla.com/` URL; every other page uses relative paths.
-- Screenshots in the repo are unoptimised (four ~1.7 MB PNGs) with camera-roll filenames (`IMG_6091.PNG`).
