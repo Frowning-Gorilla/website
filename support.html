@@ -199,6 +199,17 @@
       margin-bottom: 1.75rem;
     }
 
+    /* This page styles links per-context (.faq-a a, footer a) and has no bare
+       `a` rule. The contact link replaced the old form, so it matched nothing
+       and fell back to default browser blue. Matches .faq-a a exactly. */
+    .contact-section a {
+      color: var(--teal);
+      font-weight: 500;
+      text-decoration: none;
+    }
+
+    .contact-section a:hover { text-decoration: underline; }
+
     /* ── Footer ── */
     footer {
       background: var(--white);

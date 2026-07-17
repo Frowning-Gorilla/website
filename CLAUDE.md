@@ -81,6 +81,8 @@ Everything except `@font-face` is scoped to `.fg`, so the file cannot reach a pa
 
 Accents come in pairs and the distinction matters: `--accent` is brand colour for fills and bullets, `--accent-deep` is for anything a person reads. The brand accents **fail WCAG AA as text** (teal `#19BAB0` is 2.31:1, orange `#E0641C` is 3.35:1). Using `--accent` for text is a bug, not a style choice. Per-app themes: `theme-nearing` (teal), `theme-shape-n-ship` (orange), no class = company indigo `#3E4C7A`.
 
+**Links in body text and cards are underlined at rest. Do not remove the underlines as a design cleanup.** WCAG 1.4.1: a link identified by colour alone must contrast ≥3:1 with the surrounding text, and ours don't — measured against body copy the company indigo is **1.06:1**, teal and orange **1.41:1**. Strip the colour and the link vanishes into the sentence. (All three still clear 4.5:1 against the *background* — that's a separate question, and passing it is not a substitute.) Nav and footer link lists are exempt: a link that is the whole line is identifiable by position. Underlines use `text-underline-offset: 2px` and `text-decoration-thickness: 1px`; hover thickens to 2px rather than adding a line.
+
 A page may keep a small local `<style>` block only for rules genuinely unique to it (e.g. the homepage's app cards).
 
 ## Known state

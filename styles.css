@@ -324,13 +324,34 @@ body.fg {
   background: var(--accent);
 }
 
+/* ── Links ──────────────────────────────────────────────────────────────────
+   Underlined at rest. This is an accessibility requirement, not a style
+   preference — DO NOT remove them as a design cleanup.
+
+   WCAG 1.4.1: a link identified by colour alone must contrast at least 3:1 with
+   the text around it. Ours don't come close — measured against body copy, the
+   company indigo is 1.06:1 and the teal and orange are 1.41:1. Strip the colour
+   and the link disappears into the sentence. (All three still clear 4.5:1
+   against the background; that's a different question.)
+
+   Footer and nav link lists are exempt: a link that is the whole line is
+   identifiable by position, so the criterion doesn't apply.                   */
 .fg a {
   color: var(--accent-deep);
-  text-decoration: none;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1px;
   font-weight: 500;
 }
 
-.fg a:hover { text-decoration: underline; }
+/* Already underlined, so hover thickens rather than adds. */
+.fg a:hover { text-decoration-thickness: 2px; }
+
+.fg footer a,
+.fg nav a { text-decoration: none; }
+
+.fg footer a:hover,
+.fg nav a:hover { text-decoration: underline; }
 
 /* Keyboard focus must stay visible — don't remove without a replacement. */
 .fg a:focus-visible,
