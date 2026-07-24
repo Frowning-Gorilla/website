@@ -46,6 +46,10 @@
 
     .step p { margin-bottom: 0; }
 
+    /* Screenshot below a step's text. The .shot base style (styles.css) adds no
+       frame — these are self-framed window captures. */
+    .step .shot { margin-top: 1.1rem; }
+
     .prices { display: grid; gap: 1.25rem; margin-top: 0.5rem; }
 
     .price-card {
@@ -106,7 +110,10 @@
   <p class="hero-status">Launching soon on the App Store.</p>
 </div>
 
-<!-- SCREENSHOT SLOT — hero: the wizard mid-conversation-paste. -->
+<div class="shot-figure">
+  <img class="shot" src="shape-n-ship-concept-wizard.png" width="1500" height="945"
+       alt="Shape n Ship's concept wizard — a guided reality check that builds a prompt before you write any code">
+</div>
 
 <!--
   SOURCING — two facts, two Apple pages, linked separately on purpose:
@@ -150,21 +157,27 @@
         <span class="step-num">Step two</span>
         <h3>Build it</h3>
         <p>Track bugs, features and tests in one place, and kick off the project with a plan-first prompt that keeps the AI building small, shippable milestones.</p>
-        <!-- SCREENSHOT SLOT — step 2: the bug list. -->
+        <img class="shot" src="shape-n-ship-bugs.png" width="1500" height="930" loading="lazy"
+             alt="Shape n Ship's bug list with a bug's detail open alongside">
+
       </div>
 
       <div class="step">
         <span class="step-num">Step three</span>
         <h3>Ship it</h3>
         <p>The release checklist walks you to submission: store listing copy, App Privacy answers, deployment checks — and when Apple rejects, real help working out why and what to do.</p>
-        <!-- SCREENSHOT SLOT — step 3: the release checklist. -->
+        <img class="shot" src="shape-n-ship-release-prep.png" width="1500" height="930" loading="lazy"
+             alt="Shape n Ship's release stages, showing the prep step before submission">
+
       </div>
 
       <div class="step">
         <span class="step-num">Step four</span>
         <h3>Launch it</h3>
         <p>Shipping isn't the finish line — it's where a lot of good apps quietly stall, because promotion is the part developers are most likely to skip, or to do half-heartedly. Shape n Ship gives you a channel strategy matched to your actual app, then breaks it into ready-to-use tasks for each channel — so launch is something you work, not something you hope goes well.</p>
-        <!-- SCREENSHOT SLOT — step 4: promotion. -->
+        <img class="shot" src="shape-n-ship-promotion.png" width="1500" height="930" loading="lazy"
+             alt="Shape n Ship's promotion planner with a Product Hunt launch brief and tasks">
+
       </div>
 
     </div>
