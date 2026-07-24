@@ -449,15 +449,18 @@ body.fg {
    macOS window captures, saved as transparent PNGs with their own rounded
    corners and drop shadow baked in. Do NOT add a border, border-radius or
    box-shadow — the window already has them, and framing again double-frames it. */
-.fg .shot { display: block; width: 100%; height: auto; }
+.fg .shot { display: block; width: 100%; height: auto; margin-top: 1.25rem; }
 
 /* A screenshot standing on its own (e.g. the landing hero), centred in the
-   content column with the same width as the callout/body. */
+   content column with the same width as the callout/body. The wrapper handles
+   the spacing, so the image itself needs no top margin here. */
 .fg .shot-figure {
   max-width: 720px;
   margin: 2.5rem auto 0;
   padding: 0 2rem;
 }
+
+.fg .shot-figure .shot { margin-top: 0; }
 
 /* ── Footer ── */
 .fg footer {
