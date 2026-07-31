@@ -75,6 +75,38 @@
   unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 
+
+/* Archivo — display face for landing-page headlines. Variable, one file covers
+   400–900, so the range is declared rather than a face per weight. Body copy
+   stays DM Sans; Archivo is for headlines only.
+
+   JetBrains Mono — labels, eyebrows and figures. Not for prose.
+
+   Both are OFL, self-hosted, latin subset only (the site is en-GB). Same rule as
+   the DM faces: never add a fonts.googleapis.com link.
+
+   FILES REQUIRED IN fonts/ — see fonts/README.md:
+     fonts/archivo-latin.woff2          (variable, wght 400–900)
+     fonts/jetbrains-mono-latin.woff2   (variable, wght 400–700)                */
+
+@font-face {
+  font-family: 'Archivo';
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: swap;
+  src: url('fonts/archivo-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('fonts/jetbrains-mono-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 /* ===========================================================================
    Everything below is scoped to .fg. None of it applies without the class.
    =========================================================================== */
@@ -483,4 +515,181 @@ body.fg {
   .fg .hero h1,
   .fg .hero h2 { font-size: 1.75rem; }
   .fg .callout-card { flex-direction: column; gap: 0.5rem; }
+}
+
+
+/* ===========================================================================
+   SURFACE TOKENS + AUTOMATIC DARK THEME
+   ---------------------------------------------------------------------------
+   Added for the Shape n Ship landing page. Two parts:
+
+   1. Surface tokens (--page, --panel, --hairline …). The original palette names
+      what things ARE in the light theme (--white, --bg, --ink), which stops
+      making sense once there are two themes — --white cannot go dark. Rather
+      than rename them and touch nine pages, the new names sit alongside. Use
+      the surface tokens in new work; the old names still resolve everywhere.
+      A rename is a separate commit, and not an urgent one.
+
+   2. An opt-in dark theme, driven by the visitor's own system setting via
+      prefers-color-scheme. It is gated on .auto-theme, NOT on .fg, so it
+      reaches only pages that have been reviewed in both themes. Adding the
+      class is how a page opts in — one word per page, page by page.
+
+      Gating matters: applied to .fg it would immediately re-theme the support,
+      privacy and terms pages, none of which have been checked in dark. And the
+      frozen Eve pages carry no .fg class at all, so they cannot be reached by
+      this block under any circumstances.
+
+   Opted in so far: shape-n-ship.html.
+
+   WHY THE APP THEMES DON'T NEED A DARK VARIANT: both apps support light and
+   dark, so the site following the visitor's setting is the honest signal. The
+   brand accents do the same job in both themes — see the contrast notes below.
+   =========================================================================== */
+
+.fg {
+  /* Light theme — warm paper, not the cold #fafafa. The app art is dark, and
+     warm neutrals let a dark screenshot read as a deliberate graphic block. */
+  --page:         #F6F1E7;
+  --page-alt:     #FBF8F2;
+  --panel:        #FFFFFF;
+  --hairline:     #E0D8C8;
+
+  --text:         #1F1913;  /* 14.9:1 on --page */
+  --text-mid:     #574F47;  /*  7.1:1 on --page */
+  --text-soft:    #6B6155;  /*  5.5:1 on --page — the floor. Nothing lighter
+                               carries prose. */
+
+  --accent-wash:  rgba(224, 100, 28, 0.07);
+  --accent-edge:  rgba(224, 100, 28, 0.30);
+}
+
+@media (prefers-color-scheme: dark) {
+  .fg.auto-theme {
+    /* Warm near-black, matching the App Store screenshots. Not pure #000 —
+       the app's own chrome is warm, and true black makes the screenshots'
+       transparent corners visible as a seam. */
+    --page:         #100D0B;
+    --page-alt:     #17130F;
+    --panel:        #1A1613;
+    --hairline:     rgba(255, 255, 255, 0.10);
+
+    --text:         #FFFFFF;  /* 19.5:1 on --page */
+    --text-mid:     #A9A199;  /*  7.6:1 */
+    --text-soft:    #8D857C;  /*  5.2:1 — the floor, same role as in light. */
+
+    --accent-wash:  rgba(224, 100, 28, 0.10);
+    --accent-edge:  rgba(224, 100, 28, 0.48);
+
+    /* The accent pair inverts its logic in dark, and this is the interesting
+       part: brand orange #E0641C measures 5.5:1 on --page here, so it PASSES
+       as text — the thing it cannot do on the light background (3.35:1). The
+       deep variant would fail instead (2.4:1), so --accent-deep is remapped
+       UP to a light tint rather than down.
+
+       The rule from the light theme still holds unchanged: --accent for fills,
+       --accent-deep for anything a person reads. Only the values move. */
+    --accent-deep:  #F0A574;  /* 9.5:1 on --page */
+    --accent-light: #241A13;  /* wash behind panels, not a text colour */
+    --accent-mid:   rgba(224, 100, 28, 0.42);
+
+    /* Old names kept resolving so existing components survive the theme flip.
+       --white is a raised surface here, which is exactly the misnomer note
+       above. */
+    --bg:           #100D0B;
+    --white:        #1A1613;
+    --ink:          #FFFFFF;
+    --ink-mid:      #A9A199;
+    --ink-soft:     #8D857C;
+    --rule:         rgba(255, 255, 255, 0.10);
+  }
+}
+
+/* ── Site navigation ────────────────────────────────────────────────────────
+   Shared across app pages so none of them is a dead end. Currently used by
+   shape-n-ship.html; nearing.html and the support pages adopt it as each is
+   reworked.
+
+   The company mark is rendered as a mask so it takes the current text colour —
+   the SVG's navy gradient is invisible on a dark page, and at 26px the gradient
+   reads as flat anyway. index.html keeps the full illustration at 56px.
+
+   Nav links are exempt from the underline-at-rest rule: a link that is the
+   whole line is identifiable by position. See CLAUDE.md.                      */
+.fg .site-nav {
+  background: var(--page);
+  border-bottom: 1px solid var(--hairline);
+  padding: 0 2rem;
+}
+
+.fg .site-nav-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  height: 66px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.fg .site-nav-home {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.71875rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text);
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.fg .site-nav-home .mark {
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
+  background: var(--text);
+  -webkit-mask: url('frowning-gorilla-logo.svg') center / contain no-repeat;
+  mask: url('frowning-gorilla-logo.svg') center / contain no-repeat;
+}
+
+.fg .site-nav ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 1.875rem;
+  margin: 0;
+  padding: 0;
+}
+
+.fg .site-nav ul li { padding: 0; }
+.fg .site-nav ul li::before { content: none; }
+
+.fg .site-nav ul a {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+  text-decoration: none;
+  padding-bottom: 3px;
+  border-bottom: 2px solid transparent;
+}
+
+.fg .site-nav ul a:hover { color: var(--text); text-decoration: none; }
+
+/* Current page. aria-current does the work, so the styling has a real hook
+   rather than a class the markup has to remember to keep in sync. */
+.fg .site-nav ul a[aria-current='page'] {
+  color: var(--text);
+  border-bottom-color: var(--accent);
+}
+
+@media (max-width: 720px) {
+  .fg .site-nav { padding: 0 1.25rem; }
+  .fg .site-nav-inner { height: auto; padding: 0.9rem 0; flex-wrap: wrap; gap: 0.75rem 1.25rem; }
+  .fg .site-nav ul { gap: 1.25rem; }
 }

@@ -7,110 +7,405 @@
   <meta name="description" content="AI writes your code. Shape n Ship walks you through everything else — shaping the idea, tracking the build, passing App Review, and launching properly. For Mac, iPhone and iPad.">
   <link rel="stylesheet" href="styles.css">
   <style>
-    /* Landing-page only: the step list and the pricing block exist nowhere else.
-       Everything else comes from styles.css. */
+    /* ------------------------------------------------------------------------
+       Landing-page layout. Lives here rather than in styles.css because none
+       of it is shared yet — the .lp- rules are this page's own. When nearing.html
+       adopts the same treatment, promote this block wholesale; don't copy it.
 
-    /* .hero-status now lives in styles.css — nearing.html uses it too. */
+       Everything below reads from the surface tokens (--page, --panel, --text,
+       --hairline …), so the page follows the visitor's colour scheme with no
+       rules of its own per theme. The one word doing that is `auto-theme` on
+       <body>. Remove it and the page is permanently light.
 
-    .steps { display: grid; gap: 1.25rem; margin-top: 0.5rem; }
+       The shared .hero / .callout CLASSES are deliberately not used: this page's
+       hero is a full-bleed dark stage rather than a solid accent band, and
+       overriding a shared component on one page would have made the shared
+       version meaningless. .shot IS shared and is used as-is.
 
-    .step {
-      background: var(--white);
-      border: 1px solid var(--rule);
-      border-left: 4px solid var(--accent);
-      border-radius: 12px;
-      padding: 1.5rem 1.75rem;
-    }
+       That said, avoiding the classes does not avoid the shared sheet — it also
+       styles the bare tags this page reuses. See the reset block below.
+       ------------------------------------------------------------------------ */
+    /* ------------------------------------------------------------------------
+       RESETS FOR THE SHARED TAG RULES
 
-    .step-num {
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
+       styles.css styles the bare tags — .fg header, .fg main, .fg section,
+       .fg footer — at specificity (0,1,1). This page reuses all four tags, so a
+       single-class .lp-* rule (0,1,0) silently loses to them. Two consequences
+       worth remembering, because both are invisible until measured:
+
+         - .fg main {max-width:720px} capped the whole layout at the reading
+           width, which is the one thing this design exists to avoid.
+         - .fg header supplied padding, a background and a border-bottom to the
+           hero.
+
+       So every .lp- selector below is written as ".fg .lp-…" (0,2,0), and the
+       inherited tag defaults are zeroed here rather than fought rule by rule.
+       ------------------------------------------------------------------------ */
+    .fg main.lp-main { max-width: none; margin: 0; padding: 0; }
+    .fg .lp-section,
+    .fg .lp-band { margin-bottom: 0; }
+    .fg header.lp-hero { border-bottom: none; }
+    .fg footer.lp-footer { padding: 2.25rem 0; }
+
+
+    /* Wider than the 720px reading column. The whole argument for this design is
+       that a 1500px screenshot should not be shown at thumbnail size. */
+    .fg .lp-wrap { max-width: 1080px; margin: 0 auto; padding: 0 2rem; }
+
+    body.fg { background: var(--page); color: var(--text); }
+
+    /* ── Hero ── */
+    .fg .lp-hero { background: var(--page); padding: 5.5rem 0 3.5rem; }
+
+    .fg .lp-eyebrow {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.71875rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--accent-deep);
-      display: block;
-      margin-bottom: 0.35rem;
     }
 
-    .step h3,
-    .price-card h3 {
-      font-family: 'DM Serif Display', Georgia, serif;
-      font-size: 1.25rem;
-      font-weight: 400;
-      letter-spacing: -0.02em;
-      margin: 0 0 0.4rem;
-      /* the shared sheet gives h3 a rule beneath it; card headings don't want one */
-      padding-bottom: 0;
-      border-bottom: none;
+    .fg .lp-hero h1 {
+      font-family: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+      font-size: clamp(2.625rem, 6.2vw, 4.625rem);
+      font-weight: 900;
+      letter-spacing: -0.045em;
+      line-height: 0.94;
+      color: var(--text);
+      max-width: 20ch;
+      margin: 1.4rem 0 0;
+      text-wrap: balance;
     }
 
-    .step p { margin-bottom: 0; }
-
-    /* Screenshots are self-framed window captures — the .shot base style
-       (styles.css) adds spacing but deliberately no border/shadow. */
-
-    .prices { display: grid; gap: 1.25rem; margin-top: 0.5rem; }
-
-    .price-card {
-      background: var(--white);
-      border: 1px solid var(--rule);
-      border-radius: 12px;
-      padding: 1.5rem 1.75rem;
+    .fg .lp-lede {
+      font-size: 1.1875rem;
+      line-height: 1.55;
+      font-weight: 300;
+      color: var(--text-mid);
+      max-width: 42rem;
+      margin-top: 1.35rem;
+      text-wrap: pretty;
     }
 
-    .price-card.pro { border-color: var(--accent-mid); border-width: 1.5px; }
-
-    .price-line {
-      margin-top: 0.9rem;
-      padding-top: 0.9rem;
-      border-top: 1px solid var(--rule);
-      color: var(--ink);
-    }
-
-    .launch-note {
-      color: var(--accent-deep);
+    /* Pre-launch status. Deleted in the same commit that adds the badge — the
+       two must never both appear. See CLAUDE.md. */
+    .fg .lp-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-top: 1.9rem;
+      padding: 0.6rem 1.1rem;
+      border: 1px solid var(--accent-edge);
+      border-radius: 999px;
+      background: var(--accent-wash);
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.6875rem;
       font-weight: 500;
-      margin-top: 0.5rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent-deep);
+    }
+
+    .fg .lp-status .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+
+    /* ── Lead screenshot ────────────────────────────────────────────────────
+       Full-bleed and cropped. The capture is a transparent PNG with its own
+       window chrome and shadow, so it needs no frame — it is wider than the
+       viewport on purpose and the bottom fades into the page. */
+    .fg .lp-stage { position: relative; overflow: hidden; margin-top: 1rem; }
+
+    .fg .lp-stage img {
+      display: block;
+      width: 116%;
+      max-width: none;
+      margin-left: -8%;
+      height: auto;
+    }
+
+    /* Dark only. The fade works by painting the page colour over the bottom of
+       the capture, which is invisible when the page and the screenshot share a
+       luminance range — true in dark (#100D0B over near-black UI) and false in
+       light, where it would lay #F6F1E7 over 127px of live window content and
+       read as a broken image. In light the capture already ends on its own
+       baked drop shadow, so it needs no fade at all. */
+    @media (prefers-color-scheme: dark) {
+      .fg.auto-theme .lp-stage::after {
+        content: '';
+        position: absolute;
+        left: 0; right: 0; bottom: 0;
+        height: 26%;
+        background: linear-gradient(180deg, transparent, var(--page) 88%);
+        pointer-events: none;
+      }
+    }
+
+    /* ── Sourced claim ── */
+    .fg .lp-claim {
+      margin-top: 1rem;
+      padding: 1.6rem 1.75rem;
+      background: var(--panel);
+      border: 1px solid var(--hairline);
+      border-left: 3px solid var(--accent);
+      border-radius: 12px;
+      display: flex;
+      gap: 1.1rem;
+      align-items: flex-start;
+    }
+
+    .fg .lp-claim .flag { color: var(--accent); font-size: 1.35rem; line-height: 1.2; flex-shrink: 0; }
+    .fg .lp-claim p { font-size: 1.0625rem; line-height: 1.55; color: var(--text); font-weight: 500; }
+    .fg .lp-claim p span {
+      display: block;
+      margin-top: 0.4rem;
+      font-size: 0.9375rem;
+      font-weight: 400;
+      color: var(--text-mid);
+    }
+
+    /* ── Sections ── */
+    .fg .lp-section { padding: 5rem 0; }
+    .fg .lp-section.alt { background: var(--page-alt); }
+
+    .fg .lp-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+      padding-bottom: 1.4rem;
+      border-bottom: 1px solid var(--hairline);
+    }
+
+    .fg .lp-head h2 {
+      font-family: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+      font-size: clamp(1.875rem, 3.4vw, 2.375rem);
+      font-weight: 800;
+      letter-spacing: -0.035em;
+      line-height: 1.05;
+      color: var(--text);
+      /* the shared sheet gives main h2 a rule and serif face; neither wanted here */
+      border-bottom: none;
+      padding-bottom: 0;
       margin-bottom: 0;
     }
 
-    .price-footnotes p { margin-top: 0.6rem; }
+    .fg .lp-head .note {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.6875rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+    }
+
+    /* ── Steps ── */
+    .fg .lp-step { padding-top: 3.25rem; }
+
+    .fg .lp-step-text {
+      display: grid;
+      grid-template-columns: 15rem 1fr;
+      gap: 2.5rem;
+      align-items: start;
+    }
+
+    .fg .lp-step-num {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      color: var(--accent-deep);
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .fg .lp-step h3 {
+      font-family: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      color: var(--text);
+      border-bottom: none;
+      padding-bottom: 0;
+      margin: 0;
+    }
+
+    .fg .lp-step p { font-size: 1rem; line-height: 1.65; color: var(--text-mid); max-width: 46rem; }
+    .fg .lp-step .shot { margin-top: 1.9rem; }
+
+    /* ── Bring-your-own-AI band ─────────────────────────────────────────────
+       The only place the page inverts against its own theme: in light mode this
+       band stays dark, because the prompt capture is dark and a dark band gives
+       it an edge without a border. In dark mode it becomes --page-alt with
+       hairlines top and bottom — see the media query below. */
+    .fg .lp-band { background: #14100E; padding: 5rem 0; }
+
+    /* In dark mode #14100E measures 1.02:1 against --page — an invisible band
+       and, with it, no stage for the capture. So the band becomes the raised
+       surface, and the hairlines do the separating: at these luminances a 1px
+       rule reads where a 5% background shift does not. */
+    @media (prefers-color-scheme: dark) {
+      .fg.auto-theme .lp-band {
+        background: var(--page-alt);
+        border-top: 1px solid var(--hairline);
+        border-bottom: 1px solid var(--hairline);
+      }
+    }
+    /* Out-specifies .fg .lp-band p below, which would otherwise inflate the
+       band's mono label to lede size. */
+    .fg .lp-band p.lp-eyebrow {
+      font-size: 0.71875rem;
+      font-weight: 500;
+      line-height: 1.7;
+      color: #F0A574;
+    }
+    .fg .lp-band h2 {
+      font-family: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+      font-size: clamp(1.875rem, 3.4vw, 2.375rem);
+      font-weight: 800;
+      letter-spacing: -0.035em;
+      line-height: 1.08;
+      color: #fff;
+      border-bottom: none;
+      padding-bottom: 0;
+      margin: 1.1rem 0 0;
+      max-width: 24ch;
+      text-wrap: balance;
+    }
+    .fg .lp-band p { color: #A9A199; font-size: 1.0625rem; line-height: 1.6; max-width: 34rem; }
+    .fg .lp-band p strong { color: #fff; font-weight: 600; }
+    .fg .lp-band a { color: #F0A574; }
+    .fg .lp-band-grid { display: grid; grid-template-columns: 1fr 1.15fr; gap: 3.5rem; align-items: center; }
+    .fg .lp-band-copy { display: flex; flex-direction: column; gap: 1rem; }
+    /* No border, radius or shadow — same rule as .shot in styles.css. The
+       capture is a transparent PNG with its own rounded window chrome and baked
+       shadow, so any frame here lands out in the transparent margin and boxes
+       the window in a rectangle it doesn't have. */
+    .fg .lp-band-shot img { display: block; width: 100%; height: auto; }
+
+    /* ── Pricing ── */
+    .fg .lp-prices { display: grid; grid-template-columns: 1fr 1fr; gap: 1.75rem; padding-top: 3.25rem; }
+
+    .fg .lp-price {
+      background: var(--panel);
+      border: 1px solid var(--hairline);
+      border-radius: 14px;
+      padding: 2rem 2.1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .fg .lp-price.pro { border: 1.5px solid var(--accent-edge); background: var(--accent-wash); }
+
+    .fg .lp-price .tier {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.6875rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+    }
+
+    .fg .lp-price.pro .tier { color: var(--accent-deep); }
+
+    .fg .lp-price h3 {
+      font-family: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 1.625rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      color: var(--text);
+      border-bottom: none;
+      padding-bottom: 0;
+      margin: 0;
+    }
+
+    /* Figures set in the surrounding face with tabular widths. A monospace
+       inset was tried and removed: mono gives the full stop the same cell as a
+       digit, so "$34.99" opened up into "$34 . 99" at headline size. Applied to
+       the card so the lifetime and launch figures agree. */
+    .fg .lp-price { font-variant-numeric: tabular-nums; }
+
+    .fg .lp-price p { font-size: 0.9375rem; line-height: 1.6; color: var(--text-mid); }
+
+    .fg .lp-price .launch {
+      margin-top: 0.35rem;
+      padding-top: 0.9rem;
+      border-top: 1px solid var(--hairline);
+      color: var(--text-mid);
+    }
+
+    .fg .lp-price .launch strong { color: var(--text); font-weight: 600; }
+
+    .fg .lp-footnotes { padding-top: 2rem; display: flex; flex-direction: column; gap: 0.5rem; }
+    .fg .lp-footnotes p { font-size: 0.875rem; color: var(--text-soft); }
+
+    /* ── Footer ── */
+    .fg .lp-footer {
+      background: var(--page-alt);
+      border-top: 1px solid var(--hairline);
+      padding: 2.25rem 0;
+      text-align: center;
+    }
+
+    .fg .lp-footer p { font-size: 0.8125rem; color: var(--text-soft); }
+    .fg .lp-footer a { color: var(--text-soft); font-size: 0.8125rem; text-decoration: none; }
+    .fg .lp-footer a:hover { color: var(--text); text-decoration: underline; }
+
+    /* ── Responsive ── */
+    @media (max-width: 860px) {
+      .fg .lp-step-text { grid-template-columns: 1fr; gap: 0.9rem; }
+      .fg .lp-band-grid { grid-template-columns: 1fr; gap: 2.25rem; }
+      .fg .lp-prices { grid-template-columns: 1fr; }
+    }
 
     @media (max-width: 600px) {
-      .step, .price-card { padding: 1.25rem; }
+      .fg .lp-wrap { padding: 0 1.25rem; }
+      .fg .lp-hero { padding: 3.25rem 0 2.5rem; }
+      .fg .lp-section, .fg .lp-band { padding: 3.25rem 0; }
+      .fg .lp-stage img { width: 148%; margin-left: -24%; }
+      .fg .lp-claim { padding: 1.25rem 1.35rem; }
+      .fg .lp-price { padding: 1.5rem 1.5rem; }
     }
   </style>
 </head>
-<body class="fg theme-shape-n-ship">
+<!--
+  `auto-theme` opts this page into the prefers-color-scheme block in styles.css.
+  Both apps support light and dark, so the site follows the visitor's setting
+  rather than picking for them. Remove the word and the page is light-only;
+  nothing else needs to change. No toggle, because a toggle needs JavaScript
+  and persistence, and the system setting is already the user's answer.
+-->
+<body class="fg theme-shape-n-ship auto-theme">
 
-<header>
-  <div class="header-inner">
-    <div class="app-icon">
-      <svg viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="3.5" y="3.5" width="13" height="13" rx="3" stroke="white" stroke-width="2.4"/>
-        <rect x="9.5" y="9.5" width="13" height="13" rx="3" fill="white"/>
-      </svg>
-    </div>
-    <div class="header-text">
-      <p class="brand">Shape n Ship</p>
-      <p>for Mac, iPhone &amp; iPad</p>
-    </div>
+<nav class="site-nav" aria-label="Frowning Gorilla">
+  <div class="site-nav-inner">
+    <a class="site-nav-home" href="index.html"><span class="mark" aria-hidden="true"></span>Frowning Gorilla</a>
+    <ul>
+      <li><a href="shape-n-ship.html" aria-current="page">Shape n Ship</a></li>
+      <li><a href="nearing.html">Nearing</a></li>
+      <li><a href="shape-n-ship-support.html">Support</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="lp-hero">
+  <div class="lp-wrap">
+    <p class="lp-eyebrow">Shape n Ship &nbsp;/&nbsp; Mac &middot; iPhone &middot; iPad</p>
+    <h1>The missing half of vibe coding.</h1>
+    <p class="lp-lede">AI writes your code. Shape n Ship walks you through everything else — shaping the idea, tracking the build, passing App Review, and launching properly. On your Mac, iPhone and iPad.</p>
+
+    <!-- STORE BADGE SLOT — add the App Store badge here when a link exists.
+         PRE-LAUNCH ONLY: delete the "Launching soon" line below in the SAME
+         commit that adds the badge. Those two must never both be present, and the
+         page must never claim availability in prose. See CLAUDE.md. -->
+    <p class="lp-status"><span class="dot"></span>Launching soon on the App Store</p>
   </div>
 </header>
 
-<div class="hero">
-  <h1>The missing half of vibe coding.</h1>
-  <p>AI writes your code. Shape n Ship walks you through everything else — shaping the idea, tracking the build, passing App Review, and launching properly. On your Mac, iPhone and iPad.</p>
-
-  <!-- STORE BADGE SLOT — add the App Store badge here when a link exists.
-       PRE-LAUNCH ONLY: delete the "Launching soon" line below in the SAME
-       commit that adds the badge. Those two must never both be present, and the
-       page must never claim availability in prose. See CLAUDE.md. -->
-  <p class="hero-status">Launching soon on the App Store.</p>
-</div>
-
-<div class="shot-figure">
-  <img class="shot" src="shape-n-ship-release-prep.png" width="1500" height="930"
+<div class="lp-stage">
+  <img src="shape-n-ship-release-prep.png" width="1500" height="930"
        alt="Shape n Ship's app dashboard — the release stage pipeline, a progress chart, and project health">
 </div>
 
@@ -128,9 +423,9 @@
   new-app denominator isn't published — so no "X% of first submissions" claim is
   sourceable from Apple. Don't reintroduce one.
 -->
-<div class="callout">
-  <div class="callout-card">
-    <div class="icon">⚑</div>
+<div class="lp-wrap">
+  <div class="lp-claim">
+    <div class="flag" aria-hidden="true">⚑</div>
     <p>
       Apple rejected <a href="https://www.apple.com/newsroom/2026/05/the-app-store-stopped-over-2-point-2-billion-usd-in-fraudulent-transactions-in-2025/" rel="noopener">over 1.2 million new apps in 2025</a> — and <a href="https://www.apple.com/legal/app-store/transparency/2025/" rel="noopener">by Apple's own account</a>, apps are often submitted multiple times before approval.
       <span>Plenty of indie apps never reach launch day at all. The gap usually isn't the code. It's everything around it.</span>
@@ -138,123 +433,146 @@
   </div>
 </div>
 
-<main>
+<main class="lp-main">
 
-  <section>
-    <h2>How it works</h2>
-    <p>Four stages, in the order you actually hit them.</p>
+  <section class="lp-section">
+    <div class="lp-wrap">
+      <div class="lp-head">
+        <h2>How it works</h2>
+        <span class="note">Four stages, in the order you actually hit them</span>
+      </div>
 
-    <div class="steps">
-
-      <div class="step">
-        <span class="step-num">Step one</span>
-        <h3>Shape the idea</h3>
-        <p>A guided reality check with your AI before you write a line of code — problem, rivals, review risks, money. Not going ahead is a valid outcome; twenty minutes here can save weeks.</p>
-        <img class="shot" src="shape-n-ship-concept-wizard.png" width="1500" height="937" loading="lazy"
+      <div class="lp-step">
+        <div class="lp-step-text">
+          <div>
+            <span class="lp-step-num">01</span>
+            <h3>Shape the idea</h3>
+          </div>
+          <p>A guided reality check with your AI before you write a line of code — problem, rivals, review risks, money. Not going ahead is a valid outcome; twenty minutes here can save weeks.</p>
+        </div>
+        <img class="shot" src="shape-n-ship-concept-wizard.png" width="1474" height="1004" loading="lazy"
              alt="Shape n Ship's concept wizard shaping a new app idea before any code is written, with the reality check and detail stages completed">
       </div>
 
-      <div class="step">
-        <span class="step-num">Step two</span>
-        <h3>Build it</h3>
-        <p>Track bugs, features and tests in one place, and kick off the project with a plan-first prompt that keeps the AI building small, shippable milestones.</p>
+      <div class="lp-step">
+        <div class="lp-step-text">
+          <div>
+            <span class="lp-step-num">02</span>
+            <h3>Build it</h3>
+          </div>
+          <p>Track bugs, features and tests in one place, and kick off the project with a plan-first prompt that keeps the AI building small, shippable milestones.</p>
+        </div>
         <img class="shot" src="shape-n-ship-bugs.png" width="1500" height="930" loading="lazy"
              alt="Shape n Ship's bug list with a bug's detail open alongside">
-
       </div>
 
-      <div class="step">
-        <span class="step-num">Step three</span>
-        <h3>Ship it</h3>
-        <p>The release checklist walks you to submission: store listing copy, App Privacy answers, deployment checks — and when Apple rejects, real help working out why and what to do.</p>
-        <img class="shot" src="shape-n-ship-release-checklist.png" width="1500" height="937" loading="lazy"
+      <div class="lp-step">
+        <div class="lp-step-text">
+          <div>
+            <span class="lp-step-num">03</span>
+            <h3>Ship it</h3>
+          </div>
+          <p>The release checklist walks you to submission: store listing copy, App Privacy answers, deployment checks — and when Apple rejects, real help working out why and what to do.</p>
+        </div>
+        <img class="shot" src="shape-n-ship-release-checklist.png" width="1510" height="937" loading="lazy"
              alt="Shape n Ship's release prep checklist with App Privacy and sandbox verification items, each with an Ask AI button">
-
       </div>
 
-      <div class="step">
-        <span class="step-num">Step four</span>
-        <h3>Launch it</h3>
-        <p>Shipping isn't the finish line — it's where a lot of good apps quietly stall, because promotion is the part developers are most likely to skip, or to do half-heartedly. Shape n Ship gives you a channel strategy matched to your actual app, then breaks it into ready-to-use tasks for each channel — so launch is something you work, not something you hope goes well.</p>
+      <div class="lp-step">
+        <div class="lp-step-text">
+          <div>
+            <span class="lp-step-num">04</span>
+            <h3>Launch it</h3>
+          </div>
+          <p>Shipping isn't the finish line — it's where a lot of good apps quietly stall, because promotion is the part developers are most likely to skip, or to do half-heartedly. Shape n Ship gives you a channel strategy matched to your actual app, then breaks it into ready-to-use tasks for each channel — so launch is something you work, not something you hope goes well.</p>
+        </div>
         <img class="shot" src="shape-n-ship-promotion.png" width="1500" height="930" loading="lazy"
              alt="Shape n Ship's promotion planner with a Product Hunt launch brief and tasks">
-
       </div>
-
     </div>
   </section>
 
-  <hr class="rule">
-
-  <section>
-    <h2>Bring your own AI</h2>
-    <p>Shape n Ship doesn't bundle an AI or charge for one. It writes expert prompts, packed with your project's real context, and you run them in whatever you already use — ChatGPT, Claude, Gemini, or your coding tool.</p>
-    <img class="shot" src="shape-n-ship-ai-prompt.png" width="1500" height="942" loading="lazy"
-         alt="Shape n Ship's AI Prompt sheet showing a complete, ready-to-copy bug-fix prompt built from the project's real context">
-
-    <p><strong>No API keys. No extra AI bills.</strong> Your data stays in your own iCloud.</p>
-    <p>That means you're never paying twice for the model you already have, and you're never stuck with whichever one we happened to pick. When you change tools, the prompts still work.</p>
+  <section class="lp-band">
+    <div class="lp-wrap">
+      <div class="lp-band-grid">
+        <div class="lp-band-copy">
+          <p class="lp-eyebrow">Bring your own AI</p>
+          <h2>No API keys. No extra AI bills.</h2>
+          <p>Shape n Ship doesn't bundle an AI or charge for one. It writes expert prompts, packed with your project's real context, and you run them in whatever you already use — ChatGPT, Claude, Gemini, or your coding tool.</p>
+          <p><strong>Your data stays in your own iCloud.</strong> That means you're never paying twice for the model you already have, and you're never stuck with whichever one we happened to pick. When you change tools, the prompts still work.</p>
+        </div>
+        <div class="lp-band-shot">
+          <img src="shape-n-ship-ai-prompt.png" width="1500" height="942" loading="lazy"
+               alt="Shape n Ship's AI Prompt sheet showing a complete, ready-to-copy bug-fix prompt built from the project's real context">
+        </div>
+      </div>
+    </div>
   </section>
 
-  <hr class="rule">
-
-  <section>
-    <h2>Pricing</h2>
-
-    <!--
-      PRICES — set in App Store Connect from a GBP base; Apple derives the other
-      storefronts. The figures here are the US storefront's, in USD. They are NOT
-      a conversion of the GBP base (UK prices include VAT, US prices don't) —
-      read them off the US row in App Store Connect, never calculate them.
-
-      The GBP base and the US storefront currently share the same numerals
-      (£34.99 / $34.99). That is a property of Apple's current price matrix, not
-      a rule: never derive one currency from the other, and don't assume they
-      stay matched.
-
-      If any figure or the commercial model changes, update all of:
-        - this page (free scope, Pro scope, lifetime, launch, annual)
-        - shape-n-ship-terms.html   (model only — deliberately carries no figures)
-        - shape-n-ship-support.html (the "What's free" answer)
-        - App Store Connect (GBP base + the US storefront row)
-        - in-app paywall copy
-      The privacy page is deliberately NOT on this list — payment handling only.
-
-      The launch price is worded without a date so nothing broken can ship. When
-      the ASC temporary price change is scheduled, the real end date lands here
-      in the same commit that updates the promo text. See CLAUDE.md.
-    -->
-
-    <div class="prices">
-
-      <div class="price-card">
-        <h3>Free</h3>
-        <p>Your first three projects — idea through building and testing, with up to 15 tracked items (bugs and features combined) and one release each. The guided concept walkthrough and all development tracking are included.</p>
+  <section class="lp-section alt">
+    <div class="lp-wrap">
+      <div class="lp-head">
+        <h2>Pricing</h2>
+        <span class="note">The free tier is the trial</span>
       </div>
 
-      <div class="price-card pro">
-        <h3>Pro</h3>
-        <p>Pro removes the limits — unlimited projects, bugs, features and releases — and unlocks shipping: the release checklist and its store-listing, privacy and App Review prompts, rejection help, and the promotion module.</p>
-        <p class="price-line">Buy once — <strong>$34.99</strong> lifetime, or subscribe — <strong>$19.99/year</strong>.</p>
-        <!-- Today's price carries the visual weight: $24.99 is bold here, $34.99
-             is not. No strikethrough, no "was/now" — the launch price is framed
-             as a future increase, never as a discount. -->
-        <p class="launch-note">Launch price <strong>$24.99</strong> — rises to $34.99 shortly after launch.</p>
+      <!--
+        PRICES — set in App Store Connect from a GBP base; Apple derives the other
+        storefronts. The figures here are the US storefront's, in USD. They are NOT
+        a conversion of the GBP base (UK prices include VAT, US prices don't) —
+        read them off the US row in App Store Connect, never calculate them.
+
+        The GBP base and the US storefront currently share the same numerals
+        (£34.99 / $34.99). That is a property of Apple's current price matrix, not
+        a rule: never derive one currency from the other, and don't assume they
+        stay matched.
+
+        If any figure or the commercial model changes, update all of:
+          - this page (free scope, Pro scope, lifetime, launch, annual)
+          - shape-n-ship-terms.html   (model only — deliberately carries no figures)
+          - shape-n-ship-support.html (the "What's free" answer)
+          - App Store Connect (GBP base + the US storefront row)
+          - in-app paywall copy
+        The privacy page is deliberately NOT on this list — payment handling only.
+
+        The launch price is worded without a date so nothing broken can ship. When
+        the ASC temporary price change is scheduled, the real end date lands here
+        in the same commit that updates the promo text. See CLAUDE.md.
+      -->
+
+      <div class="lp-prices">
+        <div class="lp-price">
+          <span class="tier">Free</span>
+          <h3>Your first three projects</h3>
+          <p>Idea through building and testing, with up to 15 tracked items (bugs and features combined) and one release each. The guided concept walkthrough and all development tracking are included.</p>
+        </div>
+
+        <div class="lp-price pro">
+          <span class="tier">Pro</span>
+          <h3>Buy once — $34.99 lifetime</h3>
+          <p>Pro removes the limits — unlimited projects, bugs, features and releases — and unlocks shipping: the release checklist and its store-listing, privacy and App Review prompts, rejection help, and the promotion module.</p>
+          <p>Or subscribe — <strong>$19.99/year</strong>.</p>
+          <!-- Today's price carries the visual weight: $24.99 is bold here, $34.99
+               is not. No strikethrough, no "was/now" — the launch price is framed
+               as a future increase, never as a discount. -->
+          <p class="launch">Launch price <strong>$24.99</strong> — rises to $34.99 shortly after launch.</p>
+        </div>
       </div>
 
-    </div>
-
-    <div class="price-footnotes">
-      <p>No trial — the free tier is the trial.</p>
-      <p>Your data stays visible and exportable whether or not you're paying.</p>
-      <p>Prices shown in USD (or local equivalent).</p>
+      <div class="lp-footnotes">
+        <p>No trial — the free tier is the trial.</p>
+        <p>Your data stays visible and exportable whether or not you're paying.</p>
+        <p>Prices shown in USD (or local equivalent).</p>
+      </div>
     </div>
   </section>
 
 </main>
 
-<footer>
-  <p>© 2026 Frowning Gorilla Ltd &nbsp;·&nbsp; <a href="shape-n-ship-support.html">Support</a> &nbsp;·&nbsp; <a href="shape-n-ship-privacy.html">Privacy Policy</a> &nbsp;·&nbsp; <a href="shape-n-ship-terms.html">Terms of Use</a> &nbsp;·&nbsp; <a href="site-privacy.html">Website privacy</a></p>
+<footer class="lp-footer">
+  <div class="lp-wrap">
+    <p>© 2026 Frowning Gorilla Ltd &nbsp;·&nbsp; <a href="shape-n-ship-support.html">Support</a> &nbsp;·&nbsp; <a href="shape-n-ship-privacy.html">Privacy Policy</a> &nbsp;·&nbsp; <a href="shape-n-ship-terms.html">Terms of Use</a> &nbsp;·&nbsp; <a href="site-privacy.html">Website privacy</a></p>
+  </div>
 </footer>
 
 </body>
