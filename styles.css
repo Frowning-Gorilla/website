@@ -605,13 +605,17 @@ body.fg {
      value in dark: the brand teal is both the fill and the readable text. The
      rule from the light theme is unchanged — --accent for fills, --accent-deep
      for anything a person reads. Only the values move. */
-  .fg.auto-theme.theme-shape-n-ship {
+  .fg.auto-theme.theme-shape-n-ship,
+  .fg.auto-theme .theme-shape-n-ship {
     --accent-deep:  #F0A574;  /* 9.5:1 on --page */
     --accent-light: #241A13;  /* wash behind panels, not a text colour */
     --accent-mid:   rgba(224, 100, 28, 0.42);
+    --accent-wash:  rgba(224, 100, 28, 0.10);
+    --accent-edge:  rgba(224, 100, 28, 0.48);
   }
 
-  .fg.auto-theme.theme-nearing {
+  .fg.auto-theme.theme-nearing,
+  .fg.auto-theme .theme-nearing {
     --accent-deep:  #19BAB0;  /* 7.9:1 on --page */
     --accent-light: #0B1F1E;
     --accent-mid:   rgba(25, 186, 176, 0.42);
@@ -722,12 +726,14 @@ body.fg {
   --accent-edge: rgba(62, 76, 122, 0.30);
 }
 
-.fg.theme-shape-n-ship {
+.fg.theme-shape-n-ship,
+.fg .theme-shape-n-ship {
   --accent-wash: rgba(224, 100, 28, 0.07);
   --accent-edge: rgba(224, 100, 28, 0.30);
 }
 
-.fg.theme-nearing {
+.fg.theme-nearing,
+.fg .theme-nearing {
   --accent-wash: rgba(25, 186, 176, 0.09);
   --accent-edge: rgba(25, 186, 176, 0.34);
 }
@@ -977,7 +983,7 @@ body.fg { background: var(--page); color: var(--text); }
   font-size: 0.71875rem;
   font-weight: 500;
   line-height: 1.7;
-  color: #F0A574;
+  color: #A9B4DC;  /* company indigo, lifted for the dark band. 10.1:1 */
 }
 .fg .lp-band h2 {
   font-family: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
@@ -994,7 +1000,10 @@ body.fg { background: var(--page); color: var(--text); }
 }
 .fg .lp-band p { color: #A9A199; font-size: 1.0625rem; line-height: 1.6; max-width: 34rem; }
 .fg .lp-band p strong { color: #fff; font-weight: 600; }
-.fg .lp-band a { color: #F0A574; }
+.fg .lp-band a { color: #A9B4DC; }
+
+.fg.theme-shape-n-ship .lp-band p.lp-eyebrow,
+.fg.theme-shape-n-ship .lp-band a { color: #F0A574; }
 .fg .lp-band-grid { display: grid; grid-template-columns: 1fr 1.15fr; gap: 3.5rem; align-items: center; }
 .fg .lp-band-copy { display: flex; flex-direction: column; gap: 1rem; }
 /* No border, radius or shadow — same rule as .shot in styles.css. The
@@ -1174,3 +1183,130 @@ body.fg { background: var(--page); color: var(--text); }
   margin: 0 auto;
   filter: drop-shadow(0 18px 30px rgba(0, 0, 0, 0.38));
 }
+
+
+/* ===========================================================================
+   COMPANY FRONT (index.html)
+   ---------------------------------------------------------------------------
+   The homepage reuses the landing-page block above — same hero, sections, band
+   and wrap — so the company front and the app pages read as one site. Only the
+   pieces that exist nowhere else live here.
+
+   It carries NO theme class on <body>, so it runs on company indigo, and each
+   app row carries its own theme class. That nesting is what FIX 2 above exists
+   for; before it, a nested theme class picked up the accent pair but kept the
+   previous scope's wash, edge and dark remaps.
+   =========================================================================== */
+
+/* Company mark in the hero. Masked to --text rather than drawn, for the same
+   reason as the nav mark: the SVG is a navy illustration and vanishes on the
+   dark page. The homepage used to show it bare at 56px, which was correct while
+   the page was light-only and is a hole now that it isn't. */
+.fg .lp-mark {
+  width: 60px;
+  height: 60px;
+  background: var(--text);
+  -webkit-mask: url('frowning-gorilla-logo.svg') center / contain no-repeat;
+  mask: url('frowning-gorilla-logo.svg') center / contain no-repeat;
+  margin-bottom: 1.75rem;
+}
+
+/* ── App rows ───────────────────────────────────────────────────────────────
+   Two apps, one row each, direction alternating via .flip. Deliberately not
+   :nth-child — with exactly two rows an explicit class is easier to read than a
+   selector the markup can silently reorder out from under.
+
+   These replace the old .app-card: a small white card with a 4px accent stripe
+   down its left edge, three of which fitted above the fold and none of which
+   showed the app. A company front whose entire product line is two apps can
+   afford to show both.                                                        */
+.fg .lp-app {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 3.5rem;
+  align-items: center;
+  padding-top: 3.25rem;
+}
+
+.fg .lp-app + .lp-app { padding-top: 4.5rem; }
+
+/* Screenshot first in the source, second on screen — so the reading order
+   stays name-then-picture on narrow widths where the grid collapses.
+
+   The track sizes have to be mirrored too, not just the order: 'order' moves
+   items between existing tracks, so on its own it put the stage in the NARROW
+   track and handed the copy the wide one. That made the flipped row a different
+   component rather than a mirror of the first — Nearing's capture came out 20%
+   narrower than Shape n Ship's. */
+.fg .lp-app.flip { grid-template-columns: 1.2fr 1fr; }
+.fg .lp-app.flip .lp-app-copy { order: 2; }
+
+.fg .lp-app-copy { display: flex; flex-direction: column; gap: 0.85rem; align-items: flex-start; }
+
+.fg .lp-app-copy h3 {
+  font-family: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+  font-size: clamp(2rem, 3.6vw, 2.625rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--text);
+  border-bottom: none;
+  padding-bottom: 0;
+  margin: 0.15rem 0 0;
+}
+
+.fg .lp-app-copy p { font-size: 1.0625rem; line-height: 1.6; color: var(--text-mid); max-width: 34rem; }
+
+/* (0,2,1) to out-specify the line above, which otherwise repaints the eyebrow
+   --text-mid and takes the row's accent with it. */
+.fg .lp-app-copy p.lp-eyebrow { font-size: 0.71875rem; line-height: 1.7; color: var(--accent-deep); }
+
+.fg .lp-app-copy .lp-app-link a {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+}
+
+/* The stage is the frame, so the capture inside it gets none — which is what
+   lets one rule hold both kinds of screenshot. Shape n Ship's is a transparent
+   window capture with its own chrome and baked shadow; Nearing's is an opaque
+   JPEG with a hard rectangular edge. Framed individually they would be .shot
+   and .lp-figure respectively and would not match each other on the same page.
+   Sitting on a tinted panel, the transparent one floats and the opaque one is
+   contained, and both read as the same treatment.
+
+   The tint is the app's own accent at 7–11%, which is the only place on this
+   page the two accents appear as fills. */
+.fg .lp-app-stage {
+  background: var(--accent-wash);
+  border: 1px solid var(--hairline);
+  border-radius: 18px;
+  padding: 1.6rem;
+  overflow: hidden;
+}
+
+.fg .lp-app-stage img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+@media (max-width: 900px) {
+  .fg .lp-app,
+  .fg .lp-app.flip { grid-template-columns: 1fr; gap: 2rem; }
+  .fg .lp-app.flip .lp-app-copy { order: 0; }
+  .fg .lp-app-stage { padding: 1rem; }
+}
+
+/* ── The name, as the closing band ──────────────────────────────────────────
+   One column, not .lp-band-grid — there is no screenshot for a story about
+   facial muscles, and inventing one to fill the right-hand column is how a page
+   ends up with a stock photo of a gorilla on it. */
+.fg .lp-band-solo { max-width: 46rem; }
+.fg .lp-band-solo h2 { margin-bottom: 1.1rem; }
+.fg .lp-band-solo p { max-width: none; }
+.fg .lp-band-solo p + p { margin-top: 1rem; }

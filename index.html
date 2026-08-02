@@ -6,131 +6,137 @@
   <title>Frowning Gorilla Ltd — apps for Mac, iPhone and iPad</title>
   <meta name="description" content="Frowning Gorilla Ltd is an independent software company based in the UK, making apps for Mac, iPhone and iPad.">
   <link rel="stylesheet" href="styles.css">
-  <style>
-    /* Homepage-only. The app cards and the logo lockup exist nowhere else;
-       everything else comes from styles.css. */
-
-    /* Transparent SVG mark + the company name as live text — sharper and more
-       accessible than a baked-in wordmark image, and it mirrors the mark +
-       header-text pattern the app sub-pages use. The mark is a detailed navy
-       illustration, so it sits bare on the light header rather than reversed
-       white-on-accent inside an .app-icon tile. */
-    .logo-mark {
-      display: block;
-      width: 56px;
-      height: auto;
-      flex-shrink: 0;
-    }
-
-    .wordmark {
-      font-family: 'DM Serif Display', Georgia, serif;
-      font-size: 1.6rem;
-      font-weight: 400;
-      color: var(--ink);
-      letter-spacing: -0.02em;
-      line-height: 1;
-    }
-
-    .apps {
-      display: grid;
-      gap: 1.25rem;
-      margin-top: 0.5rem;
-    }
-
-    .app-card {
-      background: var(--white);
-      border: 1px solid var(--rule);
-      border-left: 4px solid var(--accent);
-      border-radius: 12px;
-      padding: 1.5rem 1.75rem;
-    }
-
-    .app-card h4 {
-      font-family: 'DM Serif Display', Georgia, serif;
-      font-size: 1.3125rem;
-      font-weight: 400;
-      letter-spacing: -0.02em;
-      margin: 0 0 0.4rem;
-    }
-
-    .app-card p { margin-bottom: 0; }
-
-    /* Cards link to an app's page only once that page exists. Nearing has none
-       yet, so its card has no link — that's deliberate, not an oversight. */
-    .app-card .card-link { margin-top: 0.75rem; }
-
-    @media (max-width: 600px) {
-      .logo-mark { width: 44px; }
-      .wordmark { font-size: 1.3rem; }
-      .app-card { padding: 1.25rem 1.25rem; }
-    }
-  </style>
 </head>
-<body class="fg">
+<!--
+  The company front, on the same Dark Studio system as the two landing pages.
 
-<header>
-  <div class="header-inner">
-    <img class="logo-mark" src="frowning-gorilla-logo.svg" alt="" width="56" height="55">
-    <h1 class="wordmark">Frowning Gorilla</h1>
+  NO <style> BLOCK. This page used to carry one for the logo lockup and the app
+  cards; both are now in styles.css under "COMPANY FRONT", because the layout is
+  no longer unique to this page — it reuses the .lp-* block that shape-n-ship.html
+  and nearing.html share. If a rule is needed here and nowhere else, put it in
+  that block and say so; don't restart a local stylesheet.
+
+  NO THEME CLASS on <body> — this is a company page, so it runs on company indigo
+  (#3E4C7A). Each app row carries its OWN theme class, which is how the two brand
+  accents both appear on one page without either owning it.
+
+  `auto-theme` opts the page into the dark block in styles.css, matching both
+  landing pages. The masked logo mark is part of that: the SVG is a navy
+  illustration and was invisible on a dark page, so it takes --text now.
+
+  APP STATUS — neither app is on the App Store yet. Availability is expressed
+  ONLY by a store badge, never in prose, so publishing is a one-line change.
+  When a store link exists, add the badge in the slot marked below and nowhere
+  else. If you find yourself editing sentences to announce that an app is
+  available, stop — avoiding that is the whole point of this shape.
+
+  Deliberately NOT here: the "Launching soon" status pill the two landing pages
+  carry. It would be a third place to edit on launch day, against the one-line
+  rule above. The landing pages are where a visitor looking to buy ends up.
+-->
+<body class="fg auto-theme">
+
+<nav class="site-nav" aria-label="Frowning Gorilla">
+  <div class="site-nav-inner">
+    <a class="site-nav-home" href="index.html" aria-current="page"><span class="mark" aria-hidden="true"></span>Frowning Gorilla</a>
+    <ul>
+      <li><a href="shape-n-ship.html">Shape n Ship</a></li>
+      <li><a href="nearing.html">Nearing</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="lp-hero">
+  <div class="lp-wrap">
+    <div class="lp-mark" role="img" aria-label="Frowning Gorilla"></div>
+    <p class="lp-eyebrow">Frowning Gorilla Ltd &nbsp;/&nbsp; United Kingdom</p>
+    <h1>We build the things we wanted to use.</h1>
+    <p class="lp-lede">An independent software company, making apps for Mac, iPhone and iPad. Decades of shipping software, now focused on two of our own.</p>
   </div>
 </header>
 
-<div class="hero">
-  <h2>Apps for Mac, iPhone and iPad</h2>
-  <p>An independent software company based in the UK.</p>
-</div>
+<main class="lp-main">
 
-<main>
+  <section class="lp-section">
+    <div class="lp-wrap">
+      <div class="lp-head">
+        <h2>Apps</h2>
+        <span class="note">Two &middot; Mac, iPhone and iPad</span>
+      </div>
 
-  <section>
-    <h3>Who we are</h3>
-    <p>Decades of shipping software — today focused on Mac, iPhone and iPad.</p>
-    <p>We build things we want to use ourselves, and that we think other people might find useful too.</p>
-  </section>
+      <!--
+        Each row carries its own theme class, so its eyebrow, link and the tint
+        behind its screenshot come from that app's accent. See FIX 2 in
+        styles.css for why a nested theme class needs the descendant selectors.
 
-  <section>
-    <h3>Apps</h3>
-
-    <!--
-      APP STATUS — neither app is on the App Store yet. Availability is expressed
-      ONLY by a store badge, never in prose, so publishing is a one-line change.
-
-      When a store link exists, add the badge in the slot marked below and
-      nowhere else. If you find yourself editing sentences to announce that an
-      app is available, stop — avoiding that is the whole point of this shape.
-
-      Status also appears on: shape-n-ship.html, nearing.html (once they exist).
-    -->
-
-    <div class="apps">
-
-      <article class="app-card theme-shape-n-ship">
-        <h4>Shape n Ship</h4>
-        <p>Takes an app from idea to the App Store: reality-check the concept, track bugs and features, prep the release, get through App Review, and promote the launch.</p>
-        <p class="card-link"><a href="shape-n-ship.html">More about Shape n Ship →</a></p>
-        <!-- STORE BADGE SLOT — add here when a link exists. Nothing else changes. -->
+        The screenshots are the two apps' signature views, and each is framed by
+        the stage rather than by itself — one is a transparent window capture,
+        the other an opaque JPEG, and on their own pages they use different
+        rules. See .lp-app-stage.
+      -->
+      <article class="lp-app theme-shape-n-ship">
+        <div class="lp-app-copy">
+          <p class="lp-eyebrow">Mac &middot; iPhone &middot; iPad</p>
+          <h3>Shape n Ship</h3>
+          <p>Takes an app from idea to the App Store: reality-check the concept, track bugs and features, prep the release, get through App Review, and promote the launch.</p>
+          <p class="lp-app-link"><a href="shape-n-ship.html">More about Shape n Ship &rarr;</a></p>
+          <!-- STORE BADGE SLOT — add here when a link exists. Nothing else changes. -->
+        </div>
+        <div class="lp-app-stage">
+          <img src="shape-n-ship-concept-wizard.png" width="1474" height="1004" loading="lazy"
+               alt="Shape n Ship's concept wizard, scoring an app idea against demand, competition and effort before any code is written">
+        </div>
       </article>
 
-      <article class="app-card theme-nearing">
-        <h4>Nearing</h4>
-        <p>Countdowns that live on your desktop, visible while you work rather than tucked away in a menubar. With widgets, and companions for iPhone and iPad.</p>
-        <p class="card-link"><a href="nearing.html">More about Nearing →</a></p>
-        <!-- STORE BADGE SLOT — add here when a link exists. Nothing else changes. -->
+      <article class="lp-app flip theme-nearing">
+        <div class="lp-app-copy">
+          <p class="lp-eyebrow">Mac &middot; iPhone &middot; iPad</p>
+          <h3>Nearing</h3>
+          <p>Countdowns that live on your desktop, visible while you work rather than tucked away in a menubar. With widgets, and companions for iPhone and iPad.</p>
+          <p class="lp-app-link"><a href="nearing.html">More about Nearing &rarr;</a></p>
+          <!-- STORE BADGE SLOT — add here when a link exists. Nothing else changes. -->
+        </div>
+        <div class="lp-app-stage">
+          <img src="nearing-countdowns.jpg" width="1320" height="450" loading="lazy"
+               alt="Three Nearing countdowns floating on a Mac desktop, in teal, purple and pink, each with rings for days, hours and minutes">
+        </div>
       </article>
 
     </div>
   </section>
 
-  <section>
-    <h3>About the name</h3>
-    <p>Gorillas can't frown — they lack the facial muscles humans use for it. But they still experience the same emotions. They just can't express them that way.</p>
-    <p>It's a reminder not to judge others by our own capabilities, or assume that people who can't express things the way we do don't feel them just as deeply.</p>
+  <section class="lp-section alt">
+    <div class="lp-wrap">
+      <div class="lp-head">
+        <h2>Who we are</h2>
+        <span class="note">Independent &middot; UK</span>
+      </div>
+      <div class="lp-prose">
+        <p>Decades of shipping software — today focused on Mac, iPhone and iPad.</p>
+        <p>We build things we want to use ourselves, and that we think other people might find useful too.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- The one piece of storytelling on the site, so it gets the band rather
+       than a third plain section. One column, no image — see .lp-band-solo. -->
+  <section class="lp-band">
+    <div class="lp-wrap">
+      <div class="lp-band-solo">
+        <p class="lp-eyebrow">About the name</p>
+        <h2>Gorillas can't frown.</h2>
+        <p>They lack the facial muscles humans use for it. But they still experience the same emotions. They just can't express them that way.</p>
+        <p>It's a reminder not to judge others by our own capabilities, or assume that people who can't express things the way we do don't feel them just as deeply.</p>
+      </div>
+    </div>
   </section>
 
 </main>
 
-<footer>
-  <p>© 2026 Frowning Gorilla Ltd &nbsp;·&nbsp; <a id="contact-email" href="#">email us</a> &nbsp;·&nbsp; <a href="site-privacy.html">Website privacy</a></p>
+<footer class="lp-footer">
+  <div class="lp-wrap">
+    <p>© 2026 Frowning Gorilla Ltd &nbsp;·&nbsp; <a id="contact-email" href="#">email us</a> &nbsp;·&nbsp; <a href="site-privacy.html">Website privacy</a></p>
+  </div>
 </footer>
 
 <script>
