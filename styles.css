@@ -220,6 +220,13 @@ body.fg {
   font-weight: 400;
 }
 
+/* On the support, privacy and terms pages the app name in the header links back
+   to the app's landing page. Keep it reading as the heading it already is —
+   inherit the colour, drop the body-link underline — with a hover underline as
+   the only affordance. */
+.fg .header-text h1 a { color: inherit; text-decoration: none; }
+.fg .header-text h1 a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
 /* ── Hero band ──────────────────────────────────────────────────────────────
    Uses --accent-deep, not --accent. White on the brand teal is 2.42:1 and
    fails outright; on --accent-deep it is 5.60:1. The subtitle is 0.92 white
@@ -956,6 +963,19 @@ body.fg { background: var(--page); color: var(--text); }
 
 .fg .lp-step p { font-size: 1rem; line-height: 1.65; color: var(--text-mid); max-width: 46rem; }
 .fg .lp-step .shot { margin-top: 1.9rem; }
+
+/* A "read more" link closing a landing section — the same small mono label
+   affordance as the homepage app-row links (.lp-app-link), pointing at the
+   support page's getting-started walkthrough. */
+.fg .lp-more { margin-top: 3rem; }
+.fg .lp-more a {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+}
 
 /* ── Bring-your-own-AI band ─────────────────────────────────────────────
    The only place the page inverts against its own theme: in light mode this
